@@ -1,6 +1,6 @@
 <?php
 
-namespace Nece\Framework\Adapter\Contract\Dateabase;
+namespace Nece\Framework\Adapter\Contract\DataBase;
 
 use Closure;
 /**

@@ -1,6 +1,6 @@
 <?php
 
-namespace Nece\Framework\Adapter\Contract\DataaBase;
+namespace Nece\Framework\Adapter\Contract\DataBase;
 
 /**
  * 模型接口
