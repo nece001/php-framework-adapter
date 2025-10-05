@@ -38,6 +38,14 @@ interface ISession
     public static function get(string $key, $default = null);
 
     /**
+     * 删除会话属性
+     * 
+     * @param string $key 属性键名
+     * @return void
+     */
+    public static function delete(string $key): void;
+
+    /**
      * 检查会话属性是否存在
      * 
      * @param string $key 属性键名
