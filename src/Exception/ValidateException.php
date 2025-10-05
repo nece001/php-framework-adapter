@@ -2,7 +2,7 @@
 
 namespace Nece\Framework\Adapter\Exception\Contract;
 
-use Nece\Framework\Adapter\Exception;
+use Nece\Framework\Adapter\Contract\Exception;
 
 /**
  * 验证异常
