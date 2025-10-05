@@ -3,7 +3,7 @@
 namespace Nece\Framework\Adapter\Contract\Facade;
 
 /**
- * 路由管理器接口
+ * 路由接口
  * 
  * @author nece001@163.com
  * @create 2025-10-05 12:04:56
@@ -11,7 +11,7 @@ namespace Nece\Framework\Adapter\Contract\Facade;
  * @template Route
  * @template Resource
  */
-interface IRouter
+interface IRoute
 {
     /**
      * 注册一个新的GET路由到路由器
@@ -114,4 +114,12 @@ interface IRouter
      * @return string
      */
     public static function url(string $name, array $parameters = [], bool $absolute = true): string;
+
+    /**
+     * 修复路由规则
+     * 
+     * @param string $rule 路由规则
+     * @return string
+     */
+    public static function fixRule(string $rule): string;
 }

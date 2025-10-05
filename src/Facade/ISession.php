@@ -13,13 +13,6 @@ namespace Nece\Framework\Adapter\Contract\Facade;
 interface ISession
 {
     /**
-     * 开始会话
-     * 
-     * @return void
-     */
-    public static function start(): void;
-
-    /**
      * 销毁会话
      * 
      * @return void
