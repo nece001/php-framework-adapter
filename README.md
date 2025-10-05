@@ -1,2 +1,2 @@
 # php-framework-adapter
-php框架适配
+php框架适配契约定义
