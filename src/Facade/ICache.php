@@ -1,6 +1,6 @@
 <?php
 
-namespace Nece\Framework\Adapter\Facade;
+namespace Nece\Framework\Adapter\Contract\Facade;
 
 /**
  * 缓存接口 (psr-16)

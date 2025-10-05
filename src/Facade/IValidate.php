@@ -1,6 +1,6 @@
 <?php
 
-namespace Nece\Framework\Adapter\Facade;
+namespace Nece\Framework\Adapter\Contract\Facade;
 
 /**
  * 验证器接口

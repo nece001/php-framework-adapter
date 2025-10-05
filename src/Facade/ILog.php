@@ -1,6 +1,6 @@
 <?php
 
-namespace Nece\Framework\Adapter\Facade;
+namespace Nece\Framework\Adapter\Contract\Facade;
 
 /**
  * 日志接口（psr-3）

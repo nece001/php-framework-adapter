@@ -1,6 +1,6 @@
 <?php
 
-namespace Nece\Gears;
+namespace Nece\Framework\Adapter\Contract;
 
 use Closure;
 
