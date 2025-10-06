@@ -99,11 +99,11 @@ interface IRoute
     /**
      * 创建一个路由组，该组共享相同的属性
      *
-     * @param  array  $attributes
+     * @param  string  $name
      * @param  \Closure|string  $routes
-     * @return void
+     * @return Group
      */
-    public static function group(array $attributes, $routes);
+    public static function group(string $name, $routes);
 
     /**
      * 生成路由URL
