@@ -59,7 +59,7 @@ interface IModel
      * @param array $data
      * @return bool
      */
-    public function save(array $data): bool;
+    public function save(array $data = []);
 
     /**
      * 删除
@@ -69,5 +69,5 @@ interface IModel
      *
      * @return bool
      */
-    public function delete(): bool;
+    public function delete();
 }
