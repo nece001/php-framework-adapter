@@ -23,7 +23,7 @@ interface IDbManater
      * @param string $as 别名
      * @return QueryBuilder
      */
-    public function table($table, $as = null);
+    public static function table($table, $as = null);
 
     /**
      * 原始表达式
@@ -31,7 +31,7 @@ interface IDbManater
      * @param  mixed  $value
      * @return Expression
      */
-    public function raw($value);
+    public static function raw($value);
 
     /**
      * 查询单条记录
@@ -41,7 +41,7 @@ interface IDbManater
      * @param  bool  $useReadPdo
      * @return mixed
      */
-    public function selectOne($query, $bindings = [], $useReadPdo = true);
+    public static function selectOne($query, $bindings = [], $useReadPdo = true);
 
     /**
      * 查询单个字段值
@@ -53,7 +53,7 @@ interface IDbManater
      *
      * @throws RuntimeException
      */
-    public function scalar($query, $bindings = [], $useReadPdo = true);
+    public static function scalar($query, $bindings = [], $useReadPdo = true);
 
     /**
      * 查询多条记录
@@ -63,7 +63,7 @@ interface IDbManater
      * @param  bool  $useReadPdo
      * @return array
      */
-    public function select($query, $bindings = [], $useReadPdo = true);
+    public static function select($query, $bindings = [], $useReadPdo = true);
 
     /**
      * 查询多条记录并返回生成器
@@ -73,7 +73,7 @@ interface IDbManater
      * @param  bool  $useReadPdo
      * @return \Generator
      */
-    public function cursor($query, $bindings = [], $useReadPdo = true);
+    public static function cursor($query, $bindings = [], $useReadPdo = true);
 
     /**
      * 执行插入SQL语句
@@ -82,7 +82,7 @@ interface IDbManater
      * @param  array  $bindings
      * @return bool
      */
-    public function insert($query, $bindings = []);
+    public static function insert($query, $bindings = []);
 
     /**
      * 执行更新SQL语句
@@ -91,7 +91,7 @@ interface IDbManater
      * @param  array  $bindings
      * @return int
      */
-    public function update($query, $bindings = []);
+    public static function update($query, $bindings = []);
 
     /**
      * 执行删除SQL语句
@@ -100,7 +100,7 @@ interface IDbManater
      * @param  array  $bindings
      * @return int
      */
-    public function delete($query, $bindings = []);
+    public static function delete($query, $bindings = []);
 
     /**
      * 执行SQL语句并返回布尔结果
@@ -109,7 +109,7 @@ interface IDbManater
      * @param  array  $bindings
      * @return bool
      */
-    public function statement($query, $bindings = []);
+    public static function statement($query, $bindings = []);
 
     /**
      * 执行SQL语句并返回受影响的行数
@@ -118,7 +118,7 @@ interface IDbManater
      * @param  array  $bindings
      * @return int
      */
-    public function affectingStatement($query, $bindings = []);
+    public static function affectingStatement($query, $bindings = []);
 
     /**
      * 执行原始SQL语句
@@ -126,7 +126,7 @@ interface IDbManater
      * @param  string  $query
      * @return bool
      */
-    public function unprepared($query);
+    public static function unprepared($query);
 
     /**
      * 准备SQL语句绑定参数
@@ -134,7 +134,7 @@ interface IDbManater
      * @param  array  $bindings
      * @return array
      */
-    public function prepareBindings(array $bindings);
+    public static function prepareBindings(array $bindings);
 
     /**
      * 执行数据库事务
@@ -145,35 +145,35 @@ interface IDbManater
      *
      * @throws \Throwable
      */
-    public function transaction(Closure $callback, $attempts = 1);
+    public static function transaction(Closure $callback, $attempts = 1);
 
     /**
      * 开始数据库事务
      *
      * @return void
      */
-    public function beginTransaction();
+    public static function beginTransaction();
 
     /**
      * 提交当前数据库事务
      *
      * @return void
      */
-    public function commit();
+    public static function commit();
 
     /**
      * 回滚当前数据库事务
      *
      * @return void
      */
-    public function rollBack();
+    public static function rollBack();
 
     /**
      * 获取当前数据库事务层级
      *
      * @return int
      */
-    public function transactionLevel();
+    public static function transactionLevel();
 
     /**
      * 执行给定回调函数在"dry run"模式下
@@ -181,12 +181,12 @@ interface IDbManater
      * @param  \Closure  $callback
      * @return array
      */
-    public function pretend(Closure $callback);
+    public static function pretend(Closure $callback);
 
     /**
      * 获取当前数据库连接的数据库名
      *
      * @return string
      */
-    public function getDatabaseName();
+    public static function getDatabaseName();
 }
