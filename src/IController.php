@@ -21,13 +21,6 @@ interface IController
     public function getRequest();
 
     /**
-     * 是否为JSON请求
-     * 
-     * @return bool
-     */
-    public function isJsonRequest(): bool;
-
-    /**
      * 获取请求参数
      *
      * @author nece001@163.com
