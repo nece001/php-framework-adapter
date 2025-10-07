@@ -22,9 +22,10 @@ interface IValidate
      * @param array $data 数据
      * @param array $validate 验证规则
      * @param array $message 错误消息
+     * @param array $attributes 自定义属性名
      * @param bool  $batch 是否批量验证（false=只要有一条数据验证失败就抛异常）
      *
      * @return void
      */
-    public static function validate(array $data, array $validate, array $message = [], bool $batch = false): void;
+    public static function validate(array $data, array $validate, array $message = [], array $attributes = [], bool $batch = false): void;
 }
