@@ -44,4 +44,15 @@ interface IRepository
      * @return void
      */
     public static function rollback();
+
+    /**
+     * 创建查询对象
+     *
+     * @author nece001@163.com
+     * @create 2025-10-07 00:06:14
+     *
+     * @param string $alias
+     * @return IQuery
+     */
+    public function query(string $alias = ''): IQuery;
 }
