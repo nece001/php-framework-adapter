@@ -101,9 +101,10 @@ interface IRoute
      *
      * @param  string  $name
      * @param  \Closure|string  $routes
+     * @param  array  $middleware
      * @return Group
      */
-    public static function group(string $name, $routes);
+    public static function group(string $name, $routes, array $middleware = []);
 
     /**
      * 生成路由URL
