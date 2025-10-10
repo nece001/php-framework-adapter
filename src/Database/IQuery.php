@@ -155,7 +155,7 @@ interface IQuery
      * @param string $group
      * @return self
      */
-    public function groupByRaw(string $group): self;
+    public function groupRaw(string $group): self;
 
     /**
      * 设置查询分组条件
