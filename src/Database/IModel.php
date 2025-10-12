@@ -102,5 +102,5 @@ interface IModel
      * @param array $data
      * @return self
      */
-    public function fillData(array $data): self;
+    public function fill(array $data): self;
 }
