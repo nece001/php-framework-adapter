@@ -106,4 +106,34 @@ interface IDbManater
      * @return Expression
      */
     public static function rawMax(string $field, string $alias);
+
+    /**
+     * 开启事务
+     *
+     * @author nece001@163.com
+     * @create 2025-10-12 14:56:48
+     *
+     * @return void
+     */
+    public static function startTrans();
+
+    /**
+     * 提交事务
+     *
+     * @author nece001@163.com
+     * @create 2025-10-08 10:26:24
+     *
+     * @return void
+     */
+    public static function commit();
+
+    /**
+     * 回滚事务
+     *
+     * @author nece001@163.com
+     * @create 2025-10-08 10:26:42
+     *
+     * @return void
+     */
+    public static function rollback();
 }
