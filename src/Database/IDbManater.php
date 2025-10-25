@@ -136,4 +136,26 @@ interface IDbManater
      * @return void
      */
     public static function rollback();
+
+    /**
+     * 事务
+     *
+     * @author nece001@163.com
+     * @create 2025-10-25 18:21:56
+     *
+     * @param callable $callback
+     * @return void
+     */
+    public static function transaction(callable $callback);
+
+    /**
+     * 执行SQL语句
+     *
+     * @author nece001@163.com
+     * @create 2025-10-12 14:57:24
+     *
+     * @param string $sql SQL语句
+     * @return int|bool
+     */
+    public static function execute(string $sql);
 }
