@@ -260,14 +260,14 @@ interface IQuery
     public function first();
 
     /**
-     * 获取查询记录数组
+     * 获取所有的查询记录
      *
      * @author nece001@163.com
      * @create 2025-10-09 21:29:48
      *
      * @return array
      */
-    public function fetch(): array;
+    public function fetchAll(): array;
 
     /**
      * 获取查询分页记录

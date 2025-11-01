@@ -2,6 +2,12 @@
 
 namespace Nece\Framework\Adapter\Contract\DataBase;
 
+/**
+ * 仓储对象接口
+ *
+ * @author nece001@163.com
+ * @create 2025-11-01 19:44:52
+ */
 interface IRepository
 {
     /**
@@ -13,7 +19,7 @@ interface IRepository
      * @param callable $callback
      * @return mixed
      */
-    public static function transaction(callable $callback);
+    public function transaction(callable $callback);
 
     /**
      * 开启事务
@@ -23,7 +29,7 @@ interface IRepository
      *
      * @return void
      */
-    public static function startTrans();
+    public function startTrans(): void;
 
     /**
      * 提交事务
@@ -33,7 +39,7 @@ interface IRepository
      *
      * @return void
      */
-    public static function commit();
+    public function commit(): void;
 
     /**
      * 回滚事务
@@ -43,7 +49,7 @@ interface IRepository
      *
      * @return void
      */
-    public static function rollback();
+    public function rollback(): void;
 
     /**
      * 创建查询对象
@@ -55,4 +61,34 @@ interface IRepository
      * @return IQuery
      */
     public function query(string $alias = ''): IQuery;
+
+    /**
+     * 获取模型名
+     *
+     * @author nece001@163.com
+     * @create 2025-11-01 19:44:19
+     *
+     * @return string
+     */
+    public function getModelName(): string;
+
+    /**
+     * 获取实体名
+     *
+     * @author nece001@163.com
+     * @create 2025-11-01 19:44:27
+     *
+     * @return string
+     */
+    public function getEntityName(): string;
+
+    /**
+     * 获取DTO名
+     *
+     * @author nece001@163.com
+     * @create 2025-11-01 19:44:35
+     *
+     * @return string
+     */
+    public function getDtoName(): string;
 }
