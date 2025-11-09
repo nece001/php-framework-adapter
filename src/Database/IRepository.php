@@ -73,6 +73,16 @@ interface IRepository
     public function getModelName(): string;
 
     /**
+     * 创建模型对象
+     *
+     * @author nece001@163.com
+     * @create 2025-11-01 19:44:35
+     *
+     * @return IModel
+     */
+    public function createModel(): IModel;
+
+    /**
      * 获取实体名
      *
      * @author nece001@163.com
@@ -81,14 +91,4 @@ interface IRepository
      * @return string
      */
     public function getEntityName(): string;
-
-    /**
-     * 获取DTO名
-     *
-     * @author nece001@163.com
-     * @create 2025-11-01 19:44:35
-     *
-     * @return string
-     */
-    public function getDtoName(): string;
 }

@@ -7,6 +7,8 @@ namespace Nece\Framework\Adapter\Contract\DataBase;
  *
  * @author nece001@163.com
  * @create 2025-10-05 11:13:16
+ * 
+ * @method array toArray()
  */
 interface IModel
 {
@@ -41,16 +43,6 @@ interface IModel
     public function rollback(): void;
 
     /**
-     * 获取表名
-     *
-     * @author nece001@163.com
-     * @create 2025-10-05 11:13:16
-     *
-     * @return string
-     */
-    public function getTableName(): string;
-
-    /**
      * 保存
      *
      * @author nece001@163.com
@@ -72,26 +64,14 @@ interface IModel
     public function delete();
 
     /**
-     * 查询表
+     * 获取表名(包含前缀)
      *
      * @author nece001@163.com
-     * @create 2025-10-08 11:34:30
-     *
-     * @param string $table
-     * @param string $alias
-     * @return self
-     */
-    public function from(string $table, string $alias = '');
-
-    /**
-     * 获取表别名
-     *
-     * @author nece001@163.com
-     * @create 2025-10-08 11:34:30
+     * @create 2025-10-05 11:13:16
      *
      * @return string
      */
-    public function getAlias();
+    public function getTable(): string;
 
     /**
      * 填充字段数据

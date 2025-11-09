@@ -15,18 +15,6 @@ use Closure;
 interface IDbManater
 {
     /**
-     * 获取查询构建器
-     *
-     * @author nece001@163.com
-     * @create 2025-10-05 11:28:24
-     *
-     * @param string $table 表名
-     * @param string $as 别名
-     * @return QueryBuilder
-     */
-    public static function table($table, $as = null);
-
-    /**
      * 原始表达式
      *
      * @param  mixed  $value
