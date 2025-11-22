@@ -11,6 +11,42 @@ namespace Nece\Framework\Adapter\Contract\DataBase;
 interface IRepository
 {
     /**
+     * 注册模型全局范围
+     *
+     * @author nece001@163.com
+     * @create 2025-11-22 20:23:40
+     *
+     * @param string $type
+     * @param  $scope
+     * @return void
+     */
+    public static function registerModelGlobalScope($type, IRepostoryModelScope $scope): void;
+
+    /**
+     * 注册模型保存事件
+     *
+     * @author nece001@163.com
+     * @create 2025-11-22 20:24:00
+     *
+     * @param string $type
+     * @param IRepositoryModelEvent $event
+     * @return void
+     */
+    public static function registerModelSavedEvent($type, IRepositoryModelEvent $event): void;
+
+    /**
+     * 注册模型删除事件
+     *
+     * @author nece001@163.com
+     * @create 2025-11-22 20:24:20
+     *
+     * @param string $type
+     * @param IRepositoryModelEvent $event
+     * @return void
+     */
+    public static function registerModelDeletedEvent($type, IRepositoryModelEvent $event): void;
+
+    /**
      * 执行事务
      *
      * @author nece001@163.com
@@ -63,32 +99,35 @@ interface IRepository
     public function query(string $alias = ''): IQuery;
 
     /**
-     * 获取模型名
+     * 聚合根加载数据
      *
      * @author nece001@163.com
-     * @create 2025-11-01 19:44:19
+     * @create 2025-11-22 20:26:31
      *
-     * @return string
+     * @param AggregateRoot $aggregateRoot
+     * @return void
      */
-    public function getModelName(): string;
+    public function load($aggregateRoot): void;
 
     /**
-     * 创建模型对象
+     * 聚合根保存
      *
      * @author nece001@163.com
-     * @create 2025-11-01 19:44:35
+     * @create 2025-11-22 20:26:42
      *
-     * @return IModel
+     * @param AggregateRoot $aggregateRoot
+     * @return void
      */
-    public function createModel(): IModel;
+    public function save($aggregateRoot): void;
 
     /**
-     * 获取实体名
+     * 聚合根删除
      *
      * @author nece001@163.com
-     * @create 2025-11-01 19:44:27
+     * @create 2025-11-22 20:26:52
      *
-     * @return string
+     * @param AggregateRoot $aggregateRoot
+     * @return void
      */
-    public function getEntityName(): string;
+    public function delete($aggregateRoot): void;
 }
