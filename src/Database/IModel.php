@@ -72,26 +72,4 @@ interface IModel
      * @return string
      */
     public function getTable(): string;
-
-    /**
-     * 填充字段数据
-     *
-     * @author nece001@163.com
-     * @create 2025-10-08 11:44:13
-     *
-     * @param array $data
-     * @return self
-     */
-    public function fill(array $data): self;
-
-    /**
-     * 创建查询
-     *
-     * @author nece001@163.com
-     * @create 2025-10-05 11:13:16
-     *
-     * @param string|null $alias
-     * @return IQuery
-     */
-    public function newQuery($alias = null): IQuery;
 }

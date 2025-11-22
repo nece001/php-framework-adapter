@@ -43,14 +43,6 @@ abstract class DbRepository implements IRepository
     /**
      * @inheritDoc
      */
-    public function query($alias = null): IQuery
-    {
-        return $this->createModel()->newQuery($alias);
-    }
-
-    /**
-     * @inheritDoc
-     */
     final public function load($aggregateRoot): void
     {
         $this->startTrans();
@@ -272,4 +264,9 @@ abstract class DbRepository implements IRepository
      * @return IModel
      */
     abstract protected function createModel(): IModel;
+
+    /**
+     * @inheritDoc
+     */
+    abstract public function query(string $alias = ''): IQuery;
 }
