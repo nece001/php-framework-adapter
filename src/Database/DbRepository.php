@@ -266,7 +266,13 @@ abstract class DbRepository implements IRepository
     abstract protected function createModel(): IModel;
 
     /**
-     * @inheritDoc
+     * 查询构建器
+     *
+     * @author nece001@163.com
+     * @create 2025-11-25 12:07:28
+     *
+     * @param string $alias
+     * @return IQuery
      */
     abstract public function query(string $alias = ''): IQuery;
 }
