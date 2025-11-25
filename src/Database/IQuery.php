@@ -157,13 +157,14 @@ interface IQuery
     public function select(): array;
 
     /**
-     * 获取查询分页结果
+     * 获取分页查询结果
      *
      * @author nece001@163.com
      * @create 2025-11-09 16:51:30
      *
-     * @param PagingVar $paging
-     * @return PagingCollection
+     * @param int $page
+     * @param int $size
+     * @return array
      */
-    public function paginate(PagingVar $paging): PagingCollection;
+    public function paginate(int $page, int $size): array;
 }
