@@ -42,7 +42,7 @@ interface IServiceProvider
      * @param string|array $concrete
      * @return void
      */
-    public function bind(string|array $abstract, $concrete = null): void;
+    public function bind($abstract, $concrete = null): void;
 
     /**
      * 添加视图命名空间
