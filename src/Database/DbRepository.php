@@ -43,13 +43,13 @@ abstract class DbRepository implements IRepository
     /**
      * @inheritDoc
      */
-    final public function load($aggregateRoot): void
+    final public function load($entity): void
     {
         $this->startTrans();
         try {
-            $this->loadBefore($aggregateRoot);
-            $model = $this->loadEntity($aggregateRoot);
-            $this->loadAfter($aggregateRoot, $model);
+            $this->loadBefore($entity);
+            $model = $this->loadEntity($entity);
+            $this->loadAfter($entity, $model);
             $this->commit();
         } catch (\Exception $e) {
             $this->rollback();
@@ -60,13 +60,13 @@ abstract class DbRepository implements IRepository
     /**
      * @inheritDoc
      */
-    final public function save($aggregateRoot): void
+    final public function save($entity): void
     {
         $this->startTrans();
         try {
-            $this->saveBefore($aggregateRoot);
-            $model = $this->saveEntity($aggregateRoot);
-            $this->saveAfter($aggregateRoot, $model);
+            $this->saveBefore($entity);
+            $model = $this->saveEntity($entity);
+            $this->saveAfter($entity, $model);
             $this->commit();
         } catch (\Exception $e) {
             $this->rollback();
@@ -77,13 +77,13 @@ abstract class DbRepository implements IRepository
     /**
      * @inheritDoc
      */
-    final public function delete($aggregateRoot): void
+    final public function delete($entity): void
     {
         $this->startTrans();
         try {
-            $this->deleteBefore($aggregateRoot);
-            $model = $this->deleteEntity($aggregateRoot);
-            $this->deleteAfter($aggregateRoot, $model);
+            $this->deleteBefore($entity);
+            $model = $this->deleteEntity($entity);
+            $this->deleteAfter($entity, $model);
             $this->commit();
         } catch (\Exception $e) {
             $this->rollback();
@@ -97,10 +97,10 @@ abstract class DbRepository implements IRepository
      * @author nece001@163.com
      * @create 2025-11-22 20:48:24
      *
-     * @param AggregateRoot $aggregateRoot
+     * @param Entity $entity
      * @return void
      */
-    protected function loadBefore($aggregateRoot) {}
+    protected function loadBefore($entity) {}
 
     /**
      * 加载后
@@ -108,11 +108,11 @@ abstract class DbRepository implements IRepository
      * @author nece001@163.com
      * @create 2025-11-22 20:48:57
      *
-     * @param AggregateRoot $aggregateRoot
+     * @param Entity $entity
      * @param IModel $model
      * @return void
      */
-    protected function loadAfter($aggregateRoot, $model) {}
+    protected function loadAfter($entity, $model) {}
 
     /**
      * 加载实体（填充聚合根数据）
@@ -120,14 +120,14 @@ abstract class DbRepository implements IRepository
      * @author nece001@163.com
      * @create 2025-11-22 20:49:10
      *
-     * @param AggregateRoot $aggregateRoot
+     * @param Entity $entity
      * @return IModel
      */
-    protected function loadEntity($aggregateRoot): IModel
+    protected function loadEntity($entity): IModel
     {
-        $model = $this->getModelName()::find($aggregateRoot->getId());
+        $model = $this->getModelName()::find($entity->getId());
         if ($model) {
-            $aggregateRoot->updateData($model->toArray());
+            $entity->updateData($model->toArray());
         }
 
         return $model;
@@ -139,10 +139,10 @@ abstract class DbRepository implements IRepository
      * @author nece001@163.com
      * @create 2025-11-22 20:49:33
      *
-     * @param AggregateRoot $aggregateRoot
+     * @param Entity $entity
      * @return void
      */
-    protected function saveBefore($aggregateRoot) {}
+    protected function saveBefore($entity) {}
 
     /**
      * 保存后
@@ -150,11 +150,11 @@ abstract class DbRepository implements IRepository
      * @author nece001@163.com
      * @create 2025-11-22 20:49:46
      *
-     * @param AggregateRoot $aggregateRoot
+     * @param Entity $entity
      * @param IModel $model
      * @return void
      */
-    protected function saveAfter($aggregateRoot, $model)
+    protected function saveAfter($entity, $model)
     {
         $this->dispatchModelEvents('saved', $model);
     }
@@ -165,16 +165,16 @@ abstract class DbRepository implements IRepository
      * @author nece001@163.com
      * @create 2025-11-22 20:50:00
      *
-     * @param AggregateRoot $aggregateRoot
+     * @param Entity $entity
      * @return IModel
      */
-    protected function saveEntity($aggregateRoot): IModel
+    protected function saveEntity($entity): IModel
     {
-        $model = $this->getModelName()::find($aggregateRoot->getId());
+        $model = $this->getModelName()::find($entity->getId());
         if (!$model) {
             $model = $this->createModel();
         }
-        $model->save($aggregateRoot->toArray());
+        $model->save($entity->toArray());
 
         return $model;
     }
@@ -185,10 +185,10 @@ abstract class DbRepository implements IRepository
      * @author nece001@163.com
      * @create 2025-11-22 20:50:13
      *
-     * @param AggregateRoot $aggregateRoot
+     * @param Entity $entity
      * @return void
      */
-    protected function deleteBefore($aggregateRoot) {}
+    protected function deleteBefore($entity) {}
 
     /**
      * 删除后
@@ -196,11 +196,11 @@ abstract class DbRepository implements IRepository
      * @author nece001@163.com
      * @create 2025-11-22 20:50:26
      *
-     * @param AggregateRoot $aggregateRoot
+     * @param Entity $entity
      * @param IModel $model
      * @return void
      */
-    protected function deleteAfter($aggregateRoot, $model)
+    protected function deleteAfter($entity, $model)
     {
         $this->dispatchModelEvents('deleted', $model);
     }
@@ -211,12 +211,12 @@ abstract class DbRepository implements IRepository
      * @author nece001@163.com
      * @create 2025-11-22 20:50:39
      *
-     * @param AggregateRoot $aggregateRoot
+     * @param Entity $entity
      * @return IModel
      */
-    protected function deleteEntity($aggregateRoot): IModel
+    protected function deleteEntity($entity): IModel
     {
-        $model = $this->getModelName()::find($aggregateRoot->getId());
+        $model = $this->getModelName()::find($entity->getId());
         if ($model) {
             $model->delete();
         }
@@ -235,7 +235,7 @@ abstract class DbRepository implements IRepository
      */
     protected function dispatchModelEvents($action, $model)
     {
-        $action = self::$model_events[$action] ?? [];
+        $action = isset(self::$model_events[$action]) ? self::$model_events[$action] : [];
         foreach ($action as $type => $events) {
             if ($model instanceof $type) {
                 foreach ($events as $event) {
