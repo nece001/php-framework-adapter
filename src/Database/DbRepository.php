@@ -175,6 +175,7 @@ abstract class DbRepository implements IRepository
             $model = $this->createModel();
         }
         $model->save($entity->toArray());
+        $entity->setId($model->id);
 
         return $model;
     }
