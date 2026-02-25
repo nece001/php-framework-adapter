@@ -167,4 +167,16 @@ interface IQuery
      * @return array
      */
     public function paginate(int $page, int $size): array;
+
+    /**
+     * 返回列的数组
+     *
+     * @author nece001@163.com
+     * @create 2026-02-25 13:59:27
+     *
+     * @param string|array $field
+     * @param string $key
+     * @return array
+     */
+    public function pluck($field, $key = null): array;
 }
