@@ -178,5 +178,5 @@ interface IQuery
      * @param string $key
      * @return array
      */
-    public function pluck($field, $key = null): array;
+    public function pluck($field, $key = ''): array;
 }
