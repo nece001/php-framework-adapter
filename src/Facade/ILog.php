@@ -16,11 +16,11 @@ interface ILog
      * @author nece001@163.com
      * @create 2025-10-05 10:43:06
      *
-     * @param string|\Stringable $message
+     * @param string $message
      * @param array $context
      * @return void
      */
-    static public function emergency(string|\Stringable $message, array $context = []): void;
+    static public function emergency(string $message, array $context = []): void;
 
     /**
      * 警告
@@ -28,11 +28,11 @@ interface ILog
      * @author nece001@163.com
      * @create 2025-10-05 10:43:22
      *
-     * @param string|\Stringable $message
+     * @param string $message
      * @param array $context
      * @return void
      */
-    static public function alert(string|\Stringable $message, array $context = []): void;
+    static public function alert(string $message, array $context = []): void;
 
     /**
      * 关键错误
@@ -40,11 +40,11 @@ interface ILog
      * @author nece001@163.com
      * @create 2025-10-05 10:43:38
      *
-     * @param string|\Stringable $message
+     * @param string $message
      * @param array $context
      * @return void
      */
-    static public function critical(string|\Stringable $message, array $context = []): void;
+    static public function critical(string $message, array $context = []): void;
 
     /**
      * 错误
@@ -52,11 +52,11 @@ interface ILog
      * @author nece001@163.com
      * @create 2025-10-05 10:43:54
      *
-     * @param string|\Stringable $message
+     * @param string $message
      * @param array $context
      * @return void
      */
-    static public function error(string|\Stringable $message, array $context = []): void;
+    static public function error(string $message, array $context = []): void;
 
     /**
      * 警告
@@ -64,11 +64,11 @@ interface ILog
      * @author nece001@163.com
      * @create 2025-10-05 10:44:09
      *
-     * @param string|\Stringable $message
+     * @param string $message
      * @param array $context
      * @return void
      */
-    static public function warning(string|\Stringable $message, array $context = []): void;
+    static public function warning(string $message, array $context = []): void;
 
     /**
      * 通知
@@ -76,11 +76,11 @@ interface ILog
      * @author nece001@163.com
      * @create 2025-10-05 10:44:24
      *
-     * @param string|\Stringable $message
+     * @param string $message
      * @param array $context
      * @return void
      */
-    static public function notice(string|\Stringable $message, array $context = []): void;
+    static public function notice(string $message, array $context = []): void;
 
     /**
      * 信息
@@ -88,11 +88,11 @@ interface ILog
      * @author nece001@163.com
      * @create 2025-10-05 10:44:39
      *
-     * @param string|\Stringable $message
+     * @param string $message
      * @param array $context
      * @return void
      */
-    static public function info(string|\Stringable $message, array $context = []): void;
+    static public function info(string $message, array $context = []): void;
 
     /**
      * 调试
@@ -100,11 +100,11 @@ interface ILog
      * @author nece001@163.com
      * @create 2025-10-05 10:44:54
      *
-     * @param string|\Stringable $message
+     * @param string $message
      * @param array $context
      * @return void
      */
-    static public function debug(string|\Stringable $message, array $context = []): void;
+    static public function debug(string $message, array $context = []): void;
 
     /**
      * 日志
@@ -113,9 +113,9 @@ interface ILog
      * @create 2025-10-05 10:45:09
      *
      * @param mixed $level
-     * @param string|\Stringable $message
+     * @param string $message
      * @param array $context
      * @return void
      */
-    static public function log($level, string|\Stringable $message, array $context = []): void;
+    static public function log($level, string $message, array $context = []): void;
 }
