@@ -72,4 +72,14 @@ interface IModel
      * @return string
      */
     public function getTable(): string;
+
+    /**
+     * 获取查询对象
+     *
+     * @author nece001@163.com
+     * @create 2026-03-06 17:20:55
+     *
+     * @return IQuery
+     */
+    public function newQuery(): IQuery;
 }
