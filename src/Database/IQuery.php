@@ -156,6 +156,17 @@ interface IQuery
     public function orderRaw($order): self;
 
     /**
+     * 
+     *
+     * @author nece001@163.com
+     * @create 2026-03-07 15:50:52
+     *
+     * @param bool $lock 是否加锁
+     * @return self
+     */
+    public function lock($lock = false): self;
+
+    /**
      * 获取全部查询结果
      *
      * @author nece001@163.com
