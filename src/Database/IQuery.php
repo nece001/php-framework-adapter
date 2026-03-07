@@ -156,7 +156,7 @@ interface IQuery
     public function orderRaw($order): self;
 
     /**
-     * 
+     * 设置查询锁
      *
      * @author nece001@163.com
      * @create 2026-03-07 15:50:52
@@ -165,6 +165,17 @@ interface IQuery
      * @return self
      */
     public function lock($lock = false): self;
+
+    /**
+     * 设置查询注释
+     *
+     * @author nece001@163.com
+     * @create 2026-03-07 16:09:00
+     *
+     * @param string $comment
+     * @return self
+     */
+    public function comment($comment): self;
 
     /**
      * 获取全部查询结果
