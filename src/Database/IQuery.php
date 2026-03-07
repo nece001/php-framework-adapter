@@ -156,6 +156,18 @@ interface IQuery
     public function orderRaw($order): self;
 
     /**
+     * 增加字段值
+     *
+     * @author nece001@163.com
+     * @create 2026-03-07 15:48:42
+     *
+     * @param string $field
+     * @param int $step
+     * @return self
+     */
+    public function increment(string $field, int $step = 1): self;
+
+    /**
      * 设置查询锁
      *
      * @author nece001@163.com
@@ -165,6 +177,17 @@ interface IQuery
      * @return self
      */
     public function lock($lock = false): self;
+
+    /**
+     * 更新查询
+     *
+     * @author nece001@163.com
+     * @create 2026-03-07 15:51:44
+     *
+     * @param array $data
+     * @return int
+     */
+    public function update(array $data = []): int;
 
     /**
      * 设置查询注释
