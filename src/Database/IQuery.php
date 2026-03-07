@@ -3,8 +3,6 @@
 namespace Nece\Framework\Adapter\Contract\DataBase;
 
 use Closure;
-use Nece\Gears\PagingCollection;
-use Nece\Gears\PagingVar;
 
 /**
  * 查询接口
@@ -145,6 +143,17 @@ interface IQuery
      * @return self
      */
     public function order($field, string $order = 'asc'): self;
+
+    /**
+     * 设置原生排序
+     *
+     * @author nece001@163.com
+     * @create 2026-03-07 15:47:25
+     *
+     * @param string $order
+     * @return self
+     */
+    public function orderRaw($order): self;
 
     /**
      * 获取全部查询结果
