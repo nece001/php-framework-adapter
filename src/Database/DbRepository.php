@@ -121,9 +121,9 @@ abstract class DbRepository implements IRepository
      * @create 2025-11-22 20:49:10
      *
      * @param Entity $entity
-     * @return IModel
+     * @return IModel|null
      */
-    protected function loadEntity($entity): IModel
+    protected function loadEntity($entity): ?IModel
     {
         $model = $this->getModelName()::find($entity->getId());
         if ($model) {
