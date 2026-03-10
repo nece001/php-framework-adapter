@@ -179,6 +179,28 @@ interface IQuery
     public function lock($lock = false): self;
 
     /**
+     * 设置偏移
+     *
+     * @author nece001@163.com
+     * @create 2026-03-10 13:45:39
+     *
+     * @param integer $offset
+     * @return self
+     */
+    public function offset(int $offset): self;
+
+    /**
+     * 设置限制数
+     *
+     * @author nece001@163.com
+     * @create 2026-03-10 13:45:51
+     *
+     * @param integer $limit
+     * @return self
+     */
+    public function limit(int $limit): self;
+
+    /**
      * 更新查询
      *
      * @author nece001@163.com
