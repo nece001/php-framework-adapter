@@ -12,14 +12,16 @@ use Closure;
  * 
  * @template T
  * 
- * @method self where($field, $op = null, $condition = null)
  * @method IModel find($data = null, ?Closure $closure = null)
+ * @method self where($field, $op = null, $condition = null)
+ * @method self whereIn($field, $condition = null)
+ * @method self when($condition, Closure $closure)
  * @method int count()
  * @method int min(string $field)
  * @method int max(string $field)
  * @method int sum(string $field)
  * @method int avg(string $field)
- * 
+ * @method array column(string $field)
  */
 interface IQuery
 {
