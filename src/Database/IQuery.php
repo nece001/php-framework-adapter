@@ -14,6 +14,7 @@ use Closure;
  * 
  * @method self where($field, $op = null, $condition = null)
  * @method IModel find($data = null, ?Closure $closure = null)
+ * @method int count()
  * 
  */
 interface IQuery
