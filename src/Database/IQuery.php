@@ -15,10 +15,10 @@ use Closure;
  * @method self where($field, $op = null, $condition = null)
  * @method IModel find($data = null, ?Closure $closure = null)
  * @method int count()
- * @method int min()
- * @method int max()
- * @method int sum()
- * @method int avg()
+ * @method int min(string $field)
+ * @method int max(string $field)
+ * @method int sum(string $field)
+ * @method int avg(string $field)
  * 
  */
 interface IQuery
