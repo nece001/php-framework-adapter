@@ -22,6 +22,7 @@ use Closure;
  * @method int sum(string $field)
  * @method int avg(string $field)
  * @method array column(string $field)
+ * @method mixed value(string $field)
  */
 interface IQuery
 {
