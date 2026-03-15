@@ -20,7 +20,7 @@ interface ICache
      * @param mixed $default
      * @return mixed
      */
-    static public function get(string $key, mixed $default = null): mixed;
+    static public function get(string $key, $default = null);
 
     /**
      * 设置缓存
@@ -33,7 +33,7 @@ interface ICache
      * @param null|integer|\DateInterval|null $ttl
      * @return boolean
      */
-    static public function set(string $key, mixed $value, null|int|\DateInterval $ttl = null): bool;
+    static public function set(string $key, mixed $value, $ttl = null): bool;
 
     /**
      * 删除缓存
@@ -66,7 +66,7 @@ interface ICache
      * @param mixed $default
      * @return iterable
      */
-    static public function getMultiple(iterable $keys, mixed $default = null): iterable;
+    static public function getMultiple(iterable $keys, $default = null): iterable;
 
     /**
      * 设置多个缓存
@@ -78,7 +78,7 @@ interface ICache
      * @param null|integer|\DateInterval|null $ttl
      * @return boolean
      */
-    static public function setMultiple(iterable $values, null|int|\DateInterval $ttl = null): bool;
+    static public function setMultiple(iterable $values, $ttl = null): bool;
 
     /**
      * 删除多个缓存
