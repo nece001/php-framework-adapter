@@ -15,6 +15,7 @@ use Closure;
  * @method IModel find($data = null, ?Closure $closure = null)
  * @method self where($field, $op = null, $condition = null)
  * @method self whereIn($field, $condition = null)
+ * @method self whereExists($sql)
  * @method self when($condition, Closure $closure)
  * @method int count()
  * @method int min(string $field)
