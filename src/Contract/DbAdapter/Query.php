@@ -884,4 +884,11 @@ interface Query extends \Stringable
      * @return $this
      */
     public function when($condition, $query, $otherwise = null): Query;
+
+    /**
+     * 获取最后执行的SQL语句.
+     *
+     * @return string
+     */
+    public function getLastSql(): string;
 }
