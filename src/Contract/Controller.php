@@ -59,15 +59,6 @@ interface Controller
     public function xml($data, int $code = 200, array $headers = []);
 
     /**
-     * 设置响应头
-     *
-     * @param string $key 响应头键名
-     * @param string $value 响应头值
-     * @return $this
-     */
-    public function header(string $key, string $value);
-
-    /**
      * 获取 Session
      *
      * @param string $name Session键名
