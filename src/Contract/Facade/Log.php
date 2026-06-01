@@ -1,6 +1,7 @@
 <?php
 
 namespace Nece\Framework\Adapter\Contract\Facade;
+use Psr\Log\LoggerInterface;
 
 /**
  * 日志接口（psr-3）
@@ -16,9 +17,9 @@ interface Log
      * @author nece001@163.com
      * @create 2026-06-01 11:33:21
      *
-     * @return Logger
+     * @return LoggerInterface
      */
-    public static function getLogger(): Logger;
+    public static function getLogger(): LoggerInterface;
 
     /**
      * 紧急情况
