@@ -637,6 +637,24 @@ interface Query extends \Stringable
     public function find($data = null): ?Model;
 
     /**
+     * 更新数据.
+     *
+     * @param array $data 要更新的数据
+     *
+     * @return int
+     */
+    public function update(array $data): int;
+
+    /**
+     * 删除数据.
+     *
+     * @param mixed $data 要删除的数据（可以是主键值或删除条件）
+     *
+     * @return int
+     */
+    public function delete($data = null): int;
+
+    /**
      * 查询多条记录.
      *
      * @param mixed $data 查询条件
@@ -891,4 +909,34 @@ interface Query extends \Stringable
      * @return string
      */
     public function getLastSql(): string;
+
+    /**
+     * 开启事务.
+     *
+     * @return void
+     */
+    public function startTrans(): void;
+
+    /**
+     * 提交事务.
+     *
+     * @return void
+     */
+    public function commit(): void;
+
+    /**
+     * 回滚事务.
+     *
+     * @return void
+     */
+    public function rollback(): void;
+
+    /**
+     * 执行事务操作.
+     *
+     * @param callable $callback 事务回调函数
+     *
+     * @return mixed
+     */
+    public function transaction(callable $callback);
 }
