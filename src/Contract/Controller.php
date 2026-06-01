@@ -18,14 +18,7 @@ interface Controller
      * 
      * @return Request
      */
-    public function request();
-
-    /**
-     * 获取响应对象
-     *
-     * @return Response
-     */
-    public function response();
+    public function request(): Request;
 
     /**
      * 渲染视图
