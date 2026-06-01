@@ -3,6 +3,7 @@
 namespace Nece\Framework\Adapter\Contract\DbAdapter;
 
 use Closure;
+use Nece\Framework\Adapter\Paginator;
 
 /**
  * 查询接口
@@ -613,29 +614,103 @@ interface Query extends Stringable
      * 指定分页.
      *
      * @param int $page     页数
-     * @param int $listRows 每页数量
+     * @param int $page_size 每页数量
      *
      * 使用方法：
      * - page(1, 10)  // 第1页，每页10条
      *
      * @return $this
      */
-    public function page(int $page, int $listRows = null): Query;
+    public function page(int $page, int $page_size = null): Query;
+
+    /**
+     * 查询单条记录.
+     *
+     * @param mixed $data 主键值或查询条件
+     *
+     * 使用方法：
+     * - find(1)  // 根据主键查询
+     * - find(['name' => 'test'])  // 根据条件查询
+     *
+     * @return Model|null
+     */
+    public function find($data = null): ?Model;
+
+    /**
+     * 查询多条记录.
+     *
+     * @param mixed $data 查询条件
+     *
+     * 使用方法：
+     * - select()  // 查询全部
+     * - select([1, 2, 3])  // 查询指定主键
+     * - select(['status' => 1])  // 根据条件查询
+     *
+     * @return array
+     */
+    public function select($data = null): array;
+
+    /**
+     * 分块查询数据.
+     *
+     * @param int     $size        每块的数量
+     * @param Closure $closure     处理每块数据的回调函数
+     * @param string  $column      排序字段
+     * @param string  $direction   排序方向
+     *
+     * 使用方法：
+     * - chunk(100, function($items) {
+     *     foreach ($items as $item) {
+     *         // 处理数据
+     *     }
+     * }, 'id', 'asc');
+     *
+     * @return bool
+     */
+    public function chunk(int $size, Closure $closure, string $column = 'id', string $direction = 'asc'): bool;
+
+    /**
+     * 获取单个字段值.
+     *
+     * @param string $field   字段名
+     * @param mixed  $default 默认值
+     *
+     * 使用方法：
+     * - value('name')  // 获取name字段值
+     * - value('name', 'default')  // 获取name字段值，不存在返回默认值
+     *
+     * @return mixed
+     */
+    public function value(string $field, $default = null);
+
+    /**
+     * 获取一列值.
+     *
+     * @param string $field 字段名
+     * @param string $key   索引字段名
+     *
+     * 使用方法：
+     * - column('name')  // 获取name列数组
+     * - column('name', 'id')  // 获取name列数组，以id为索引
+     *
+     * @return array
+     */
+    public function column(string $field, string $key = ''): array;
 
     /**
      * 分页查询.
      *
-     * @param int  $listRows 每页数量
-     * @param bool $simple   是否简洁模式
+     * @param int   $page     当前页码
+     * @param int   $page_size 每页数量
+     * @param array $options  额外选项
      *
      * 使用方法：
-     * - paginate()  // 默认每页15条
-     * - paginate(20)  // 每页20条
-     * - paginate(10, true)  // 简洁模式，仅返回数据
+     * - paginate(1, 15)  // 第1页，每页15条
+     * - paginate(2, 20)  // 第2页，每页20条
      *
      * @return Paginator
      */
-    public function paginate(int $listRows = 15, bool $simple = false): Paginator;
+    public function paginate(int $page = 1, int $page_size = 15, array $options = []): Paginator;
 
     /**
      * 指定having查询.
