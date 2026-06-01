@@ -33,11 +33,10 @@ interface Controller
      * 重定向
      * 
      * @param string $url 重定向URL
-     * @param mixed $result 重定向结果
      * @param int $code HTTP状态码
      * @return Response
      */
-    public function redirect(string $url, $result, int $code = 302);
+    public function redirect(string $url, int $code = 302);
 
     /**
      * 返回 JSON 响应
