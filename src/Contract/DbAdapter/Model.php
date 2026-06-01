@@ -123,32 +123,6 @@ interface Model
     public function delete($data = null): bool;
 
     /**
-     * 创建新记录.
-     *
-     * @param array $data 数据
-     *
-     * 使用方法：
-     * - $user = User::create(['name' => '张三', 'age' => 18])
-     *
-     * @return Model
-     */
-    public static function create(array $data): Model;
-
-    /**
-     * 更新记录.
-     *
-     * @param array $data      更新数据
-     * @param mixed $condition 更新条件
-     *
-     * 使用方法：
-     * - User::update(['name' => '李四'], ['id' => 1])
-     * - User::update(['name' => '李四'], 1)
-     *
-     * @return int
-     */
-    public static function update(array $data, $condition = null): int;
-
-    /**
      * 获取原始数据.
      *
      * @param string $name 属性名（留空返回全部原始数据）
@@ -160,16 +134,6 @@ interface Model
      * @return mixed
      */
     public function getOriginal(string $name = null);
-
-    /**
-     * 判断是否为新增数据.
-     *
-     * 使用方法：
-     * - if ($model->isNewRecord()) { ... }
-     *
-     * @return bool
-     */
-    public function isNewRecord(): bool;
 
     /**
      * 设置主键值.
@@ -287,5 +251,5 @@ interface Model
      *
      * @return ModelRelationQuery
      */
-    public static function query(): ModelRelationQuery;
+    public function query(): ModelRelationQuery;
 }

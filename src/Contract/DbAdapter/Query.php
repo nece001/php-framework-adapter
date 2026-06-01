@@ -11,7 +11,7 @@ use Nece\Framework\Adapter\Paginator;
  * @author nece001@163.com
  * @create 2026-06-01 10:24:47
  */
-interface Query extends Stringable
+interface Query extends \Stringable
 {
     /**
      * 指定当前数据表名（不含前缀）.
@@ -648,7 +648,7 @@ interface Query extends Stringable
      *
      * @return array
      */
-    public function select($data = null): array;
+    public function select(array $data = []): array;
 
     /**
      * 分块查询数据.
