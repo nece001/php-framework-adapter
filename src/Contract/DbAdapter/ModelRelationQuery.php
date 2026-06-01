@@ -1,6 +1,6 @@
 <?php
 
-namespace Nece\Framework\Adapter\Contract\Db;
+namespace Nece\Framework\Adapter\Contract\DbAdapter;
 
 interface ModelRelationQuery extends Query
 {
@@ -119,4 +119,71 @@ interface ModelRelationQuery extends Query
      * @return $this
      */
     public function load($relation, $callback = null): ModelRelationQuery;
+
+    /**
+     * 查询单条记录.
+     *
+     * @param mixed $data 主键值或查询条件
+     *
+     * 使用方法：
+     * - User::find(1)  // 根据主键查询
+     * - User::find(['name' => '张三'])  // 根据条件查询
+     *
+     * @return mixed
+     */
+    public static function find($data = null);
+
+    /**
+     * 查询多条记录.
+     *
+     * @param mixed $data 查询条件
+     *
+     * 使用方法：
+     * - User::select()  // 查询全部
+     * - User::select([1, 2, 3])  // 查询指定主键
+     * - User::select(['status' => 1])  // 根据条件查询
+     *
+     * @return array
+     */
+    public static function select($data = null): array;
+
+    /**
+     * 获取或创建记录.
+     *
+     * @param array $where 查询条件
+     * @param array $data  创建数据
+     *
+     * 使用方法：
+     * - User::firstOrCreate(['email' => 'test@example.com'], ['name' => '张三'])
+     *
+     * @return mixed
+     */
+    public static function firstOrCreate(array $where, array $data = []);
+
+    /**
+     * 更新或创建记录.
+     *
+     * @param array $where 查询条件
+     * @param array $data  更新/创建数据
+     *
+     * 使用方法：
+     * - User::updateOrCreate(['email' => 'test@example.com'], ['name' => '李四'])
+     *
+     * @return mixed
+     */
+    public static function updateOrCreate(array $where, array $data = []);
+
+    /**
+     * 设置查询范围.
+     *
+     * @param string $scope 范围名称
+     * @param array  $args  参数
+     *
+     * 使用方法：
+     * - $query->scope('active')  // 应用active查询范围
+     * - $query->scope('status', [1])  // 带参数的查询范围
+     *
+     * @return $this
+     */
+    public function scope(string $scope, array $args = []): ModelRelationQuery;
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Nece\Framework\Adapter\Contract\Db;
+namespace Nece\Framework\Adapter\Contract\DbAdapter;
 
 use Closure;
 

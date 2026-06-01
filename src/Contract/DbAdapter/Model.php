@@ -1,8 +1,8 @@
 <?php
 
-namespace Nece\Framework\Adapter\Contract\Db;
+namespace Nece\Framework\Adapter\Contract\DbAdapter;
 
-interface Model extends ModelRelationQuery
+interface Model
 {
     /**
      * 构造函数.
@@ -150,59 +150,6 @@ interface Model extends ModelRelationQuery
     public static function update(array $data, $condition = null): int;
 
     /**
-     * 查询单条记录.
-     *
-     * @param mixed $data 主键值或查询条件
-     *
-     * 使用方法：
-     * - User::find(1)  // 根据主键查询
-     * - User::find(['name' => '张三'])  // 根据条件查询
-     *
-     * @return Model|null
-     */
-    public static function find($data = null);
-
-    /**
-     * 查询多条记录.
-     *
-     * @param mixed $data 查询条件
-     *
-     * 使用方法：
-     * - User::select()  // 查询全部
-     * - User::select([1, 2, 3])  // 查询指定主键
-     * - User::select(['status' => 1])  // 根据条件查询
-     *
-     * @return array
-     */
-    public static function select($data = null): array;
-
-    /**
-     * 获取或创建记录.
-     *
-     * @param array $where 查询条件
-     * @param array $data  创建数据
-     *
-     * 使用方法：
-     * - User::firstOrCreate(['email' => 'test@example.com'], ['name' => '张三'])
-     *
-     * @return Model
-     */
-    public static function firstOrCreate(array $where, array $data = []): Model;
-
-    /**
-     * 更新或创建记录.
-     *
-     * @param array $where 查询条件
-     * @param array $data  更新/创建数据
-     *
-     * 使用方法：
-     * - User::updateOrCreate(['email' => 'test@example.com'], ['name' => '李四'])
-     *
-     * @return Model
-     */
-    public static function updateOrCreate(array $where, array $data = []): Model;
-
-    /**
      * 获取原始数据.
      *
      * @param string $name 属性名（留空返回全部原始数据）
@@ -333,16 +280,13 @@ interface Model extends ModelRelationQuery
     public function autoWriteTimestamp(bool $auto = true): Model;
 
     /**
-     * 设置查询范围.
-     *
-     * @param string $scope 范围名称
-     * @param array  $args  参数
+     * 获取查询对象.
      *
      * 使用方法：
-     * - $model->scope('active')  // 应用active查询范围
-     * - $model->scope('status', [1])  // 带参数的查询范围
+     * - User::query()->where('status', 1)->select()
+     * - User::query()->with('posts')->find(1)
      *
-     * @return $this
+     * @return \Nece\Framework\Adapter\Contract\Db\ModelRelationQuery
      */
-    public function scope(string $scope, array $args = []): Model;
+    public static function query(): ModelRelationQuery;
 }
