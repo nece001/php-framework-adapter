@@ -2,23 +2,347 @@
 
 namespace Nece\Framework\Adapter\Contract\Db;
 
-interface Model
+interface Model extends ModelRelationQuery
 {
-    public static function query(): string;
+    /**
+     * 构造函数.
+     *
+     * @param array $data 初始化数据
+     */
+    public function __construct(array $data = []);
 
-    public function beginTransaction(): void;
+    /**
+     * 创建模型实例.
+     *
+     * @param array $data 初始化数据
+     *
+     * 使用方法：
+     * - $model = User::instance(['name' => '张三'])
+     *
+     * @return Model
+     */
+    public static function instance(array $data = []): Model;
 
-    public function commit(): void;
+    /**
+     * 设置单个属性值.
+     *
+     * @param string $name  属性名
+     * @param mixed  $value 属性值
+     *
+     * 使用方法：
+     * - $model->setAttr('name', '张三')
+     *
+     * @return $this
+     */
+    public function setAttr(string $name, $value): Model;
 
-    public function rollback(): void;
+    /**
+     * 获取单个属性值.
+     *
+     * @param string $name 属性名
+     *
+     * 使用方法：
+     * - $model->getAttr('name')
+     *
+     * @return mixed
+     */
+    public function getAttr(string $name);
 
-    public function save(array $data): bool;
+    /**
+     * 设置多个属性值.
+     *
+     * @param array $data 属性数据
+     *
+     * 使用方法：
+     * - $model->data(['name' => '张三', 'age' => 18])
+     *
+     * @return $this
+     */
+    public function data(array $data): Model;
 
-    public function update(array $data): bool;
+    /**
+     * 获取全部属性数据.
+     *
+     * @param bool $withRelation 是否包含关联数据
+     *
+     * 使用方法：
+     * - $model->getData()  // 只获取模型属性
+     * - $model->getData(true)  // 包含关联数据
+     *
+     * @return array
+     */
+    public function getData(bool $withRelation = false): array;
 
-    public function delete(): bool;
+    /**
+     * 判断属性是否存在.
+     *
+     * @param string $name 属性名
+     *
+     * 使用方法：
+     * - $model->hasAttr('name')
+     *
+     * @return bool
+     */
+    public function hasAttr(string $name): bool;
 
-    public function find(int $id): self|null;
+    /**
+     * 保存数据.
+     *
+     * @param array $data 数据
+     *
+     * 使用方法：
+     * - $model->save()  // 保存已有数据
+     * - $model->save(['name' => '张三'])  // 设置数据并保存
+     *
+     * @return bool
+     */
+    public function save(array $data = []): bool;
 
-    public function toArray(): array;
+    /**
+     * 强制更新数据.
+     *
+     * @param array $data 数据
+     *
+     * 使用方法：
+     * - $model->forceUpdate(['name' => '李四'])
+     *
+     * @return bool
+     */
+    public function forceUpdate(array $data = []): bool;
+
+    /**
+     * 删除数据.
+     *
+     * @param mixed $data 主键值或删除条件
+     *
+     * 使用方法：
+     * - $model->delete()  // 删除当前模型
+     * - Model::destroy(1)  // 删除指定主键
+     *
+     * @return bool
+     */
+    public function delete($data = null): bool;
+
+    /**
+     * 创建新记录.
+     *
+     * @param array $data 数据
+     *
+     * 使用方法：
+     * - $user = User::create(['name' => '张三', 'age' => 18])
+     *
+     * @return Model
+     */
+    public static function create(array $data): Model;
+
+    /**
+     * 更新记录.
+     *
+     * @param array $data      更新数据
+     * @param mixed $condition 更新条件
+     *
+     * 使用方法：
+     * - User::update(['name' => '李四'], ['id' => 1])
+     * - User::update(['name' => '李四'], 1)
+     *
+     * @return int
+     */
+    public static function update(array $data, $condition = null): int;
+
+    /**
+     * 查询单条记录.
+     *
+     * @param mixed $data 主键值或查询条件
+     *
+     * 使用方法：
+     * - User::find(1)  // 根据主键查询
+     * - User::find(['name' => '张三'])  // 根据条件查询
+     *
+     * @return Model|null
+     */
+    public static function find($data = null);
+
+    /**
+     * 查询多条记录.
+     *
+     * @param mixed $data 查询条件
+     *
+     * 使用方法：
+     * - User::select()  // 查询全部
+     * - User::select([1, 2, 3])  // 查询指定主键
+     * - User::select(['status' => 1])  // 根据条件查询
+     *
+     * @return array
+     */
+    public static function select($data = null): array;
+
+    /**
+     * 获取或创建记录.
+     *
+     * @param array $where 查询条件
+     * @param array $data  创建数据
+     *
+     * 使用方法：
+     * - User::firstOrCreate(['email' => 'test@example.com'], ['name' => '张三'])
+     *
+     * @return Model
+     */
+    public static function firstOrCreate(array $where, array $data = []): Model;
+
+    /**
+     * 更新或创建记录.
+     *
+     * @param array $where 查询条件
+     * @param array $data  更新/创建数据
+     *
+     * 使用方法：
+     * - User::updateOrCreate(['email' => 'test@example.com'], ['name' => '李四'])
+     *
+     * @return Model
+     */
+    public static function updateOrCreate(array $where, array $data = []): Model;
+
+    /**
+     * 获取原始数据.
+     *
+     * @param string $name 属性名（留空返回全部原始数据）
+     *
+     * 使用方法：
+     * - $model->getOriginal()  // 获取全部原始数据
+     * - $model->getOriginal('name')  // 获取指定属性的原始值
+     *
+     * @return mixed
+     */
+    public function getOriginal(string $name = null);
+
+    /**
+     * 判断是否为新增数据.
+     *
+     * 使用方法：
+     * - if ($model->isNewRecord()) { ... }
+     *
+     * @return bool
+     */
+    public function isNewRecord(): bool;
+
+    /**
+     * 设置主键值.
+     *
+     * @param mixed $value 主键值
+     *
+     * 使用方法：
+     * - $model->setKey(1)
+     *
+     * @return $this
+     */
+    public function setKey($value): Model;
+
+    /**
+     * 获取主键值.
+     *
+     * 使用方法：
+     * - $id = $model->getKey()
+     *
+     * @return mixed
+     */
+    public function getKey();
+
+    /**
+     * 获取主键名.
+     *
+     * 使用方法：
+     * - $keyName = $model->getKeyName()
+     *
+     * @return string
+     */
+    public function getKeyName(): string;
+
+    /**
+     * 获取数据表名.
+     *
+     * 使用方法：
+     * - $table = $model->getTable()
+     *
+     * @return string
+     */
+    public function getTable(): string;
+
+    /**
+     * 获取模型名称.
+     *
+     * 使用方法：
+     * - $name = $model->getModelName()
+     *
+     * @return string
+     */
+    public function getModelName(): string;
+
+    /**
+     * 获取错误信息.
+     *
+     * @param bool $all 是否获取全部错误
+     *
+     * 使用方法：
+     * - $error = $model->getError()  // 获取第一条错误
+     * - $errors = $model->getError(true)  // 获取全部错误
+     *
+     * @return mixed
+     */
+    public function getError(bool $all = false);
+
+    /**
+     * 设置错误信息.
+     *
+     * @param mixed $error 错误信息（支持字符串或数组）
+     *
+     * 使用方法：
+     * - $model->setError('保存失败')
+     * - $model->setError(['name' => '名称不能为空'])
+     *
+     * @return $this
+     */
+    public function setError($error): Model;
+
+    /**
+     * 数据验证.
+     *
+     * @param array  $data  数据
+     * @param mixed  $rules 验证规则（支持数组或字符串场景名）
+     * @param array  $msg   错误信息
+     * @param string $scene 验证场景
+     *
+     * 使用方法：
+     * - $model->validate(['name' => 'require'])
+     * - $model->validate([], 'scene_name')
+     *
+     * @return bool
+     */
+    public function validate(array $data = [], $rules = [], array $msg = [], string $scene = ''): bool;
+
+    /**
+     * 开启自动写入时间戳.
+     *
+     * @param bool $auto 是否自动写入
+     *
+     * 使用方法：
+     * - $model->autoWriteTimestamp()  // 开启自动写入
+     * - $model->autoWriteTimestamp(false)  // 关闭自动写入
+     *
+     * @return $this
+     */
+    public function autoWriteTimestamp(bool $auto = true): Model;
+
+    /**
+     * 设置查询范围.
+     *
+     * @param string $scope 范围名称
+     * @param array  $args  参数
+     *
+     * 使用方法：
+     * - $model->scope('active')  // 应用active查询范围
+     * - $model->scope('status', [1])  // 带参数的查询范围
+     *
+     * @return $this
+     */
+    public function scope(string $scope, array $args = []): Model;
 }
