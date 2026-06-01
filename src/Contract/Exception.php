@@ -10,7 +10,7 @@ class Exception extends \Exception
      * 框架适配异常
      *
      * @author nece001@163.com
-     * @create 2025-10-05 11:00:00
+     * @create 2026-06-01 10:24:47
      *
      * @param string $message 错误消息
      * @param mixed $code    错误码

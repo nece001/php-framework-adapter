@@ -4,6 +4,12 @@ namespace Nece\Framework\Adapter\Contract\DbAdapter;
 
 use Closure;
 
+/**
+ * 查询接口
+ *
+ * @author nece001@163.com
+ * @create 2026-06-01 10:24:47
+ */
 interface Query extends Stringable
 {
     /**

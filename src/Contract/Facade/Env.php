@@ -2,13 +2,16 @@
 
 namespace Nece\Framework\Adapter\Contract\Facade;
 
+/**
+ * 环境变量接口
+ *
+ * @author nece001@163.com
+ * @create 2026-06-01 10:24:47
+ */
 interface Env
 {
     /**
      * 获取环境变量
-     *
-     * @author nece001@163.com
-     * @create 2026-03-14 22:39:51
      *
      * @param string $key
      * @param mixed $default
@@ -19,9 +22,6 @@ interface Env
     /**
      * 设置环境变量
      *
-     * @author nece001@163.com
-     * @create 2026-03-14 22:40:13
-     *
      * @param string $key
      * @param mixed $value
      * @return void
@@ -30,9 +30,6 @@ interface Env
 
     /**
      * 判断环境变量是否存在
-     *
-     * @author nece001@163.com
-     * @create 2026-03-14 22:40:37
      *
      * @param string $key
      * @return boolean

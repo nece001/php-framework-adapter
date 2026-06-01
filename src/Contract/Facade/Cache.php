@@ -6,15 +6,12 @@ namespace Nece\Framework\Adapter\Contract\Facade;
  * 缓存接口 (psr-16)
  *
  * @author nece001@163.com
- * @create 2025-10-05 10:38:25
+ * @create 2026-06-01 10:24:47
  */
 interface Cache
 {
     /**
      * 获取缓存
-     *
-     * @author nece001@163.com
-     * @create 2025-10-05 10:37:22
      *
      * @param string $key
      * @param mixed $default
@@ -24,9 +21,6 @@ interface Cache
 
     /**
      * 设置缓存
-     *
-     * @author nece001@163.com
-     * @create 2025-10-05 10:37:29
      *
      * @param string $key
      * @param mixed $value
@@ -38,9 +32,6 @@ interface Cache
     /**
      * 删除缓存
      *
-     * @author nece001@163.com
-     * @create 2025-10-05 10:37:36
-     *
      * @param string $key
      * @return boolean
      */
@@ -49,18 +40,12 @@ interface Cache
     /**
      * 清空缓存
      *
-     * @author nece001@163.com
-     * @create 2025-10-05 10:37:43
-     *
      * @return boolean
      */
     static public function clear(): bool;
 
     /**
      * 获取多个缓存
-     *
-     * @author nece001@163.com
-     * @create 2025-10-05 10:37:49
      *
      * @param iterable $keys
      * @param mixed $default
@@ -71,9 +56,6 @@ interface Cache
     /**
      * 设置多个缓存
      *
-     * @author nece001@163.com
-     * @create 2025-10-05 10:37:56
-     *
      * @param iterable $values
      * @param null|integer|\DateInterval|null $ttl
      * @return boolean
@@ -83,9 +65,6 @@ interface Cache
     /**
      * 删除多个缓存
      *
-     * @author nece001@163.com
-     * @create 2025-10-05 10:38:03
-     *
      * @param iterable $keys
      * @return boolean
      */
@@ -93,9 +72,6 @@ interface Cache
 
     /**
      * 判断缓存是否存在
-     *
-     * @author nece001@163.com
-     * @create 2025-10-05 10:38:10
      *
      * @param string $key
      * @return boolean

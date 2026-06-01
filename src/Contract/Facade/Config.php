@@ -6,15 +6,12 @@ namespace Nece\Framework\Adapter\Contract\Facade;
  * 配置获取接口
  *
  * @author nece001@163.com
- * @create 2025-10-05 13:22:02
+ * @create 2026-06-01 10:24:47
  */
 interface Config
 {
     /**
      * 获取配置变量值
-     *
-     * @author nece001@163.com
-     * @create 2025-10-05 13:22:20
      *
      * @param string $key
      * @param mixed $default
@@ -24,9 +21,6 @@ interface Config
 
     /**
      * 获取环境变量值
-     *
-     * @author nece001@163.com
-     * @create 2025-10-05 13:22:45
      *
      * @param string $key
      * @param mixed $default

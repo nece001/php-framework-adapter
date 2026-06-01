@@ -6,10 +6,11 @@ use Closure;
 
 /**
  * 中间件接口
- * 
- * @template T
+ *
  * @author nece001@163.com
- * @create 2025-09-29 19:33:29
+ * @create 2026-06-01 10:24:47
+ *
+ * @template T
  */
 interface Middleware
 {

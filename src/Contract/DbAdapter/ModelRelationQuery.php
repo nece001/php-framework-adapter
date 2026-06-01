@@ -2,6 +2,12 @@
 
 namespace Nece\Framework\Adapter\Contract\DbAdapter;
 
+/**
+ * 模型关联查询接口
+ *
+ * @author nece001@163.com
+ * @create 2026-06-01 10:24:47
+ */
 interface ModelRelationQuery extends Query
 {
     /**

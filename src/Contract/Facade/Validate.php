@@ -7,17 +7,14 @@ namespace Nece\Framework\Adapter\Contract\Facade;
  * 验证规则统一参考：https://learnku.com/docs/laravel/12.x/validation/16955
  *
  * @author nece001@163.com
- * @create 2025-10-05 10:58:42
- * 
+ * @create 2026-06-01 10:24:47
+ *
  * @throws ValidateException
  */
 interface Validate
 {
     /**
      * 验证数据
-     *
-     * @author nece001@163.com
-     * @create 2025-10-05 10:54:20
      *
      * @param array $data 数据
      * @param array $validate 验证规则

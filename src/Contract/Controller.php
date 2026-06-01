@@ -6,7 +6,7 @@ namespace Nece\Framework\Adapter\Contract;
  * 控制器接口
  *
  * @author nece001@163.com
- * @create 2025-10-05 12:05:20
+ * @create 2026-06-01 10:24:47
  * 
  * @template Request
  * @template Response

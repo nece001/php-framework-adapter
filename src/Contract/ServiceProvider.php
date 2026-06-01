@@ -8,15 +8,12 @@ use Closure;
  * 服务提供器接口
  *
  * @author nece001@163.com
- * @create 2025-10-05 10:53:55
+ * @create 2026-06-01 10:24:47
  */
 interface ServiceProvider
 {
     /**
      * 服务注册
-     *
-     * @author nece001@163.com
-     * @create 2025-10-05 17:41:54
      *
      * @return void
      */
@@ -25,18 +22,12 @@ interface ServiceProvider
     /**
      * 服务启动
      *
-     * @author nece001@163.com
-     * @create 2025-10-05 17:42:02
-     *
      * @return void
      */
     public function boot();
 
     /**
      * 绑定服务
-     *
-     * @author nece001@163.com
-     * @create 2025-10-05 17:42:22
      *
      * @param string|array $abstract
      * @param string|array $concrete
@@ -47,9 +38,6 @@ interface ServiceProvider
     /**
      * 添加视图命名空间
      *
-     * @author nece001@163.com
-     * @create 2025-10-05 17:42:38
-     *
      * @param string $namespace
      * @param string $path
      * @return void
@@ -59,9 +47,6 @@ interface ServiceProvider
     /**
      * 加载路由文件
      *
-     * @author nece001@163.com
-     * @create 2025-10-05 18:00:06
-     *
      * @param string $filename 路由文件路径
      * @return void
      */
@@ -70,9 +55,6 @@ interface ServiceProvider
     /**
      * 注册路由
      *
-     * @author nece001@163.com
-     * @create 2025-10-05 18:00:06
-     *
      * @param Closure $closure
      * @return void
      */
@@ -80,9 +62,6 @@ interface ServiceProvider
 
     /**
      * 注册命令
-     *
-     * @author nece001@163.com
-     * @create 2025-10-05 18:00:06
      *
      * @param array $commands
      * @return void

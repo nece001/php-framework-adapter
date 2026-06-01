@@ -7,15 +7,12 @@ namespace Nece\Framework\Adapter\Contract\Facade;
  * 作用：解决依赖注入的兼容问题
  *
  * @author nece001@163.com
- * @create 2025-09-13 14:35:02
+ * @create 2026-06-01 10:24:47
  */
 interface Container
 {
     /**
      * 初始化应用
-     *
-     * @author nece001@163.com
-     * @create 2025-09-13 14:34:15
      *
      * @return void
      */
@@ -24,18 +21,12 @@ interface Container
     /**
      * 获取应用实例
      *
-     * @author nece001@163.com
-     * @create 2025-09-13 14:35:08
-     *
      * @return Object
      */
     public static function getApp();
 
     /**
      * 依赖注入创建实例
-     *
-     * @author nece001@163.com
-     * @create 2025-09-13 14:35:20
      *
      * @param string $abstract
      * @param array $vars

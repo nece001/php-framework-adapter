@@ -1,7 +1,13 @@
 <?php
 
-namespace Nece\Framework\Adapter\Contract;
+namespace Nece\Framework\Adapter\Contract\Facade;
 
+/**
+ * 数据库接口
+ *
+ * @author nece001@163.com
+ * @create 2026-06-01 10:24:47
+ */
 interface Db
 {
     /**

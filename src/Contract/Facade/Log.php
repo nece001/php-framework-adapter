@@ -6,15 +6,12 @@ namespace Nece\Framework\Adapter\Contract\Facade;
  * 日志接口（psr-3）
  *
  * @author nece001@163.com
- * @create 2025-10-05 10:38:42
+ * @create 2026-06-01 10:24:47
  */
 interface Log
 {
     /**
      * 紧急情况
-     *
-     * @author nece001@163.com
-     * @create 2025-10-05 10:43:06
      *
      * @param string $message
      * @param array $context
@@ -25,9 +22,6 @@ interface Log
     /**
      * 警告
      *
-     * @author nece001@163.com
-     * @create 2025-10-05 10:43:22
-     *
      * @param string $message
      * @param array $context
      * @return void
@@ -36,9 +30,6 @@ interface Log
 
     /**
      * 关键错误
-     *
-     * @author nece001@163.com
-     * @create 2025-10-05 10:43:38
      *
      * @param string $message
      * @param array $context
@@ -49,9 +40,6 @@ interface Log
     /**
      * 错误
      *
-     * @author nece001@163.com
-     * @create 2025-10-05 10:43:54
-     *
      * @param string $message
      * @param array $context
      * @return void
@@ -60,9 +48,6 @@ interface Log
 
     /**
      * 警告
-     *
-     * @author nece001@163.com
-     * @create 2025-10-05 10:44:09
      *
      * @param string $message
      * @param array $context
@@ -73,9 +58,6 @@ interface Log
     /**
      * 通知
      *
-     * @author nece001@163.com
-     * @create 2025-10-05 10:44:24
-     *
      * @param string $message
      * @param array $context
      * @return void
@@ -84,9 +66,6 @@ interface Log
 
     /**
      * 信息
-     *
-     * @author nece001@163.com
-     * @create 2025-10-05 10:44:39
      *
      * @param string $message
      * @param array $context
@@ -97,9 +76,6 @@ interface Log
     /**
      * 调试
      *
-     * @author nece001@163.com
-     * @create 2025-10-05 10:44:54
-     *
      * @param string $message
      * @param array $context
      * @return void
@@ -108,9 +84,6 @@ interface Log
 
     /**
      * 日志
-     *
-     * @author nece001@163.com
-     * @create 2025-10-05 10:45:09
      *
      * @param mixed $level
      * @param string $message
