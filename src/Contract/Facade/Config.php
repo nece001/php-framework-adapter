@@ -17,14 +17,5 @@ interface Config
      * @param mixed $default
      * @return mixed
      */
-    public function config(string $key, $default = null);
-
-    /**
-     * 获取环境变量值
-     *
-     * @param string $key
-     * @param mixed $default
-     * @return mixed
-     */
-    public function env(string $key, $default = null);
+    public static function get(string $key, $default = null);
 }

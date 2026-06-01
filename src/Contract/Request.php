@@ -38,7 +38,7 @@ interface Request
      * $email = $request->param('email', '', 'trim,email');
      * ```
      */
-    public function param($name = '', $default = null, $filter = ''): array;
+    public function param($name = '', $default = null, $filter = '');
 
     /**
      * 获取包含文件在内的所有请求参数
@@ -47,7 +47,7 @@ interface Request
      * @param string|array $filter 过滤方法
      * @return mixed
      */
-    public function all($name = '', $filter = ''): array;
+    public function all($name = '', $filter = '');
 
     /**
      * 获取GET参数
@@ -57,7 +57,7 @@ interface Request
      * @param string|array      $filter  过滤方法
      * @return mixed
      */
-    public function get($name = '', $default = null, $filter = ''): array;
+    public function get($name = '', $default = null, $filter = '');
 
     /**
      * 获取POST参数
@@ -67,7 +67,7 @@ interface Request
      * @param string|array      $filter  过滤方法
      * @return mixed
      */
-    public function post($name = '', $default = null, $filter = ''): array;
+    public function post($name = '', $default = null, $filter = '');
 
     /**
      * 获取PUT参数
@@ -77,7 +77,7 @@ interface Request
      * @param string|array      $filter  过滤方法
      * @return mixed
      */
-    public function put($name = '', $default = null, $filter = ''): array;
+    public function put($name = '', $default = null, $filter = '');
 
     /**
      * 获取DELETE参数
@@ -87,18 +87,17 @@ interface Request
      * @param string|array      $filter  过滤方法
      * @return mixed
      */
-    public function delete($name = '', $default = null, $filter = ''): array;
+    public function delete($name = '', $default = null, $filter = '');
 
     /**
      * 获取变量（底层方法，支持过滤和默认值）
      *
-     * @param array        $data    数据源
      * @param string|bool  $name    字段名，false返回原始数据
      * @param mixed        $default 默认值
      * @param string|array $filter  过滤函数
      * @return mixed
      */
-    public function input(array $data = [], $name = '', $default = null, $filter = ''): array;
+    public function input($name = '', $default = null, $filter = '');
 
     /**
      * 获取路由参数
@@ -108,7 +107,7 @@ interface Request
      * @param string|array      $filter  过滤方法
      * @return mixed
      */
-    public function route($name = '', $default = null, $filter = ''): array;
+    public function route($name = '', $default = null, $filter = '');
 
     /**
      * 获取Cookie参数
@@ -118,7 +117,7 @@ interface Request
      * @param string|array $filter  过滤方法
      * @return mixed
      */
-    public function cookie(string $name = '', $default = null, $filter = ''): array;
+    public function cookie(string $name = '', $default = null, $filter = '');
 
     /**
      * 获取Session数据
@@ -127,7 +126,7 @@ interface Request
      * @param mixed  $default 默认值
      * @return mixed
      */
-    public function session(string $name = '', $default = null): array;
+    public function session(string $name = '', $default = null);
 
     /**
      * 获取SERVER参数
@@ -136,7 +135,7 @@ interface Request
      * @param string $default 默认值
      * @return mixed
      */
-    public function server(string $name = '', string $default = ''): array;
+    public function server(string $name = '', string $default = '');
 
     /**
      * 获取Header信息
@@ -155,7 +154,7 @@ interface Request
      * $headers = $request->header();
      * ```
      */
-    public function header(string $name = '', string $default = null): array;
+    public function header(string $name = '', string $default = null);
 
     /**
      * 获取上传文件
@@ -163,7 +162,7 @@ interface Request
      * @param string $name 文件字段名
      * @return array
      */
-    public function file(string $name = ''): array;
+    public function file(string $name = '');
 
     /**
      * 判断请求类型
