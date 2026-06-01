@@ -8,7 +8,7 @@ namespace Nece\Framework\Adapter\Contract\Facade;
  * @author nece001@163.com
  * @create 2025-10-05 13:22:02
  */
-interface IConfig
+interface Config
 {
     /**
      * 获取配置变量值

@@ -11,7 +11,7 @@ namespace Nece\Framework\Adapter\Contract\Facade;
  * 
  * @throws ValidateException
  */
-interface IValidate
+interface Validate
 {
     /**
      * 验证数据

@@ -2,7 +2,7 @@
 
 namespace Nece\Framework\Adapter\Contract\Facade;
 
-interface IEnv
+interface Env
 {
     /**
      * 获取环境变量

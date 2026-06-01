@@ -10,7 +10,7 @@ namespace Nece\Framework\Adapter\Contract\Facade;
  * 
  * @template Session
  */
-interface ISession
+interface Session
 {
     /**
      * 销毁会话

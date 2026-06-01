@@ -11,7 +11,7 @@ namespace Nece\Framework\Adapter\Contract;
  * @template Request
  * @template Response
  */
-interface IController
+interface Controller
 {
     /**
      * 获取当前请求

@@ -13,9 +13,9 @@ class Exception extends \Exception
      * @create 2025-10-05 11:00:00
      *
      * @param string $message 错误消息
-     * @param string|int    $code    错误码
+     * @param mixed $code    错误码
      */
-    public function __construct(string $message = '', string|int $code = 0, Throwable|null $previous = null)
+    public function __construct(string $message = '',  $code = 0, Throwable|null $previous = null)
     {
         parent::__construct($message, 0, $previous);
         $this->code = $code;

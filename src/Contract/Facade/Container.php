@@ -9,7 +9,7 @@ namespace Nece\Framework\Adapter\Contract\Facade;
  * @author nece001@163.com
  * @create 2025-09-13 14:35:02
  */
-interface IContainer
+interface Container
 {
     /**
      * 初始化应用

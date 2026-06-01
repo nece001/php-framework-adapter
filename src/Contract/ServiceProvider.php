@@ -10,7 +10,7 @@ use Closure;
  * @author nece001@163.com
  * @create 2025-10-05 10:53:55
  */
-interface IServiceProvider
+interface ServiceProvider
 {
     /**
      * 服务注册

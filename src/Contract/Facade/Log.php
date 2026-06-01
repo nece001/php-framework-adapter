@@ -8,7 +8,7 @@ namespace Nece\Framework\Adapter\Contract\Facade;
  * @author nece001@163.com
  * @create 2025-10-05 10:38:42
  */
-interface ILog
+interface Log
 {
     /**
      * 紧急情况

@@ -11,7 +11,7 @@ use Closure;
  * @author nece001@163.com
  * @create 2025-09-29 19:33:29
  */
-interface IMiddleware
+interface Middleware
 {
     /**
      * 处理请求
