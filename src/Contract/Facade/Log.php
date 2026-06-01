@@ -11,6 +11,16 @@ namespace Nece\Framework\Adapter\Contract\Facade;
 interface Log
 {
     /**
+     * 获取日志记录器
+     *
+     * @author nece001@163.com
+     * @create 2026-06-01 11:33:21
+     *
+     * @return Logger
+     */
+    public static function getLogger(): Logger;
+
+    /**
      * 紧急情况
      *
      * @param string $message
