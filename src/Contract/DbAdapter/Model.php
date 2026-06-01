@@ -5,23 +5,16 @@ namespace Nece\Framework\Adapter\Contract\DbAdapter;
 interface Model
 {
     /**
-     * 构造函数.
-     *
-     * @param array $data 初始化数据
-     */
-    public function __construct(array $data = []);
-
-    /**
      * 创建模型实例.
      *
      * @param array $data 初始化数据
      *
      * 使用方法：
-     * - $model = User::instance(['name' => '张三'])
+     * - $model = User::instance(new \think\Model())
      *
      * @return Model
      */
-    public static function instance(array $data = []): Model;
+    public static function instance($dbModel): Model;
 
     /**
      * 设置单个属性值.
@@ -286,7 +279,7 @@ interface Model
      * - User::query()->where('status', 1)->select()
      * - User::query()->with('posts')->find(1)
      *
-     * @return \Nece\Framework\Adapter\Contract\Db\ModelRelationQuery
+     * @return ModelRelationQuery
      */
     public static function query(): ModelRelationQuery;
 }
