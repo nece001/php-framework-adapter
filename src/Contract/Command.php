@@ -11,6 +11,46 @@ namespace Nece\Framework\Adapter\Contract;
 interface Command
 {
     /**
+     * 参数是必需的
+     */
+    public const ARGUMENT_REQUIRED = 1;
+
+    /**
+     * 参数是可选的（默认行为）
+     */
+    public const ARGUMENT_OPTIONAL = 2;
+
+    /**
+     * 参数接受多个值
+     */
+    public const ARGUMENT_IS_ARRAY = 4;
+
+    /**
+     * 选项不接受值（默认行为）
+     */
+    public const OPTION_VALUE_NONE = 1;
+
+    /**
+     * 选项必须有值
+     */
+    public const OPTION_VALUE_REQUIRED = 2;
+
+    /**
+     * 选项的值是可选的
+     */
+    public const OPTION_VALUE_OPTIONAL = 4;
+
+    /**
+     * 选项接受多个值
+     */
+    public const OPTION_VALUE_IS_ARRAY = 8;
+
+    /**
+     * 选项允许传递否定变体
+     */
+    public const OPTION_VALUE_NEGATABLE = 16;
+
+    /**
      * 处理命令
      *
      * @return void
@@ -124,4 +164,29 @@ interface Command
      * @return void
      */
     public function error(string $message): void;
+
+    /**
+     * 添加命令行参数
+     *
+     * @param string $name 参数名称
+     * @param int|null $mode 参数模式（ARGUMENT_REQUIRED/ARGUMENT_OPTIONAL/ARGUMENT_IS_ARRAY）
+     * @param string $description 参数描述
+     * @param mixed $default 默认值
+     * @param array $suggestedValues 输入补全的值
+     * @return $this
+     */
+    public function addArgument(string $name, ?int $mode = null, string $description = '', $default = null, array $suggestedValues = []): self;
+
+    /**
+     * 添加命令行选项
+     *
+     * @param string $name 选项名称
+     * @param string|null $shortcut 快捷方式
+     * @param int|null $mode 选项模式（OPTION_VALUE_NONE/OPTION_VALUE_REQUIRED等）
+     * @param string $description 选项描述
+     * @param mixed $default 默认值
+     * @param array $suggestedValues 输入补全的值
+     * @return $this
+     */
+    public function addOption(string $name, ?string $shortcut = null, ?int $mode = null, string $description = '', $default = null, array $suggestedValues = []): self;
 }
