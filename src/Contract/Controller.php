@@ -30,6 +30,19 @@ interface Controller
     public function render(string $view, $data);
 
     /**
+     * 返回响应
+     *
+     * @author nece001@163.com
+     * @create 2026-06-02 23:39:16
+     *
+     * @param string $body
+     * @param integer $status
+     * @param array $headers
+     * @return Response
+     */
+    public function response(string $body = '', int $status = 200, array $headers = []);
+
+    /**
      * 重定向
      * 
      * @param string $url 重定向URL
@@ -116,7 +129,7 @@ interface Controller
      * @param bool $httpOnly 是否仅HTTP访问
      * @return $this
      */
-    public function cookie(string $name, string $value = '', int $expire = 0, string $path = '/', string $domain = '', bool $secure = false, bool $httpOnly = true);
+    public function setCookie(string $name, string $value = '', int $expire = 0, string $path = '/', string $domain = '', bool $secure = false, bool $httpOnly = true);
 
     /**
      * 删除 Cookie
