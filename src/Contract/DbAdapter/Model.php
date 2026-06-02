@@ -60,29 +60,17 @@ interface Model
     public function data(array $data): Model;
 
     /**
-     * 获取全部属性数据.
+     * 获取属性数据.
      *
-     * @param bool $withRelation 是否包含关联数据
-     *
-     * 使用方法：
-     * - $model->getData()  // 只获取模型属性
-     * - $model->getData(true)  // 包含关联数据
-     *
-     * @return array
-     */
-    public function getData(bool $withRelation = false): array;
-
-    /**
-     * 判断属性是否存在.
-     *
-     * @param string $name 属性名
+     * @param string|null $name 属性名（留空返回全部数据）
      *
      * 使用方法：
-     * - $model->hasAttr('name')
+     * - $model->getData()  // 获取全部属性数据
+     * - $model->getData('name')  // 获取指定属性值
      *
-     * @return bool
+     * @return array|mixed
      */
-    public function hasAttr(string $name): bool;
+    public function getData(?string $name = null);
 
     /**
      * 保存数据.
@@ -252,4 +240,14 @@ interface Model
      * @return ModelRelationQuery
      */
     public function query(): ModelRelationQuery;
+
+    /**
+     * 转换为数组.
+     *
+     * @author nece001@163.com
+     * @create 2026-06-02 10:28:34
+     *
+     * @return array
+     */
+    public function toArray(): array;
 }
