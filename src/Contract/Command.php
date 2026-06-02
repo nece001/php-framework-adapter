@@ -175,7 +175,7 @@ interface Command
      * @param array $suggestedValues 输入补全的值
      * @return $this
      */
-    public function addArgument(string $name, ?int $mode = null, string $description = '', $default = null, array $suggestedValues = []): self;
+    public function addArg(string $name, ?int $mode = null, string $description = '', $default = null, array $suggestedValues = []): self;
 
     /**
      * 添加命令行选项
@@ -188,5 +188,5 @@ interface Command
      * @param array $suggestedValues 输入补全的值
      * @return $this
      */
-    public function addOption(string $name, ?string $shortcut = null, ?int $mode = null, string $description = '', $default = null, array $suggestedValues = []): self;
+    public function addOpt(string $name, ?string $shortcut = null, ?int $mode = null, string $description = '', $default = null, array $suggestedValues = []): self;
 }
