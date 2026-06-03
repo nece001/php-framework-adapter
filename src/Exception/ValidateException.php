@@ -1,6 +1,6 @@
 <?php
 
-namespace Nece\Framework\Adapter\Contract\Exception;
+namespace Nece\Framework\Adapter\Exception;
 
 use Nece\Framework\Adapter\Contract\Exception;
 
