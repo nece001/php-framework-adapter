@@ -81,6 +81,18 @@ interface Controller
     public function session(string $name = '', $default = null);
 
     /**
+     * 获取 Session 并删除
+     *
+     * @author nece001@163.com
+     * @create 2026-06-03 10:29:09
+     *
+     * @param string $name
+     * @param mixed $default 默认值
+     * @return mixed
+     */
+    public function pullSession(string $name, $default = null);
+
+    /**
      * 设置 Session
      *
      * @param string $name Session键名
@@ -96,6 +108,14 @@ interface Controller
      * @return $this
      */
     public function deleteSession(string $name);
+
+    /**
+     * 设置 Session 过期时间
+     *
+     * @param int $life_time Session 过期时间（秒）
+     * @return $this
+     */
+    public function setSessionLifeTime(int $life_time);
 
     /**
      * 文件下载
