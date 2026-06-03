@@ -8,15 +8,8 @@ namespace Nece\Framework\Adapter;
  * @author nece001@163.com
  * @create 2026-06-01 10:24:47
  */
-class Paginator
+class Paginator extends Collection
 {
-    /**
-     * 当前页数据列表
-     *
-     * @var array
-     */
-    protected $items;
-
     /**
      * 总记录数
      *
@@ -48,20 +41,10 @@ class Paginator
      */
     public function __construct(array $items, int $total, int $currentPage, int $pageSize)
     {
-        $this->items = $items;
+        parent::__construct($items);
         $this->total = $total;
         $this->currentPage = max(1, $currentPage);
         $this->pageSize = max(1, $pageSize);
-    }
-
-    /**
-     * 获取当前页数据列表
-     *
-     * @return array
-     */
-    public function items(): array
-    {
-        return $this->items;
     }
 
     /**

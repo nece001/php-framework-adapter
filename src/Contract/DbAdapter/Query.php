@@ -3,7 +3,8 @@
 namespace Nece\Framework\Adapter\Contract\DbAdapter;
 
 use Closure;
-use Nece\Framework\Adapter\Paginator;
+use Nece\Framework\Adapter\DbAdapter\Collection;
+use Nece\Framework\Adapter\DbAdapter\Paginator;
 
 /**
  * 查询接口
@@ -664,9 +665,9 @@ interface Query extends \Stringable
      * - select([1, 2, 3])  // 查询指定主键
      * - select(['status' => 1])  // 根据条件查询
      *
-     * @return array
+     * @return Collection
      */
-    public function select(array $data = []): array;
+    public function select(array $data = []): Collection;
 
     /**
      * 分块查询数据.

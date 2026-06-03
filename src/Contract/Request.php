@@ -289,6 +289,16 @@ interface Request
     public function pathinfo(): string;
 
     /**
+     * 获取当前请求的path（不含域名和query string）
+     *
+     * @author nece001@163.com
+     * @create 2026-06-03 15:20:54
+     *
+     * @return string
+     */
+    public function path(): string;
+
+    /**
      * 获取当前URL的后缀
      * @return string
      */
