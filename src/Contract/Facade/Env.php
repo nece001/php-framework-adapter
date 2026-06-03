@@ -36,5 +36,13 @@ interface Env
      */
     public static function has($key): bool;
 
-
+    /**
+     * 获取应用环境
+     *
+     * @author nece001@163.com
+     * @create 2026-06-03 19:15:32
+     *
+     * @return string
+     */
+    public static function getAppEnv(): string;
 }
