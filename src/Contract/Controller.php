@@ -2,6 +2,8 @@
 
 namespace Nece\Framework\Adapter\Contract;
 
+use Nece\Framework\Adapter\Paginator;
+
 /**
  * 控制器接口
  *
@@ -160,4 +162,50 @@ interface Controller
      * @return $this
      */
     public function deleteCookie(string $name, string $path = '/', string $domain = '');
+
+    /**
+     * 返回成功分页数据
+     *
+     * @author nece001@163.com
+     * @create 2026-05-26 11:12:37
+     *
+     * @param Paginator $page
+     * @return Response
+     */
+    public function successPagedList(Paginator $page);
+
+    /**
+     * 返回成功数据
+     *
+     * @author nece001@163.com
+     * @create 2026-06-04 17:23:27
+     *
+     * @param mixed $data
+     * @return Response
+     */
+    public function success($data = null);
+
+    /**
+     * 返回失败数据
+     *
+     * @author nece001@163.com
+     * @create 2026-06-04 17:23:43
+     *
+     * @param string $message
+     * @param string $code
+     * @param mixed $data
+     * @return Response
+     */
+    public function failure(string $message = 'failure', $code = '', $data = null);
+
+    /**
+     * 返回异常数据
+     *
+     * @author nece001@163.com
+     * @create 2026-06-04 17:23:49
+     *
+     * @param \Exception $e
+     * @return Response
+     */
+    public function exception(\Exception $e);
 }
