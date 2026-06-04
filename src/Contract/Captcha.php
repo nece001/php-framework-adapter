@@ -14,13 +14,15 @@ interface Captcha
      */
     public function image(): string;
 
+
     /**
-     * 获取验证码值
+     * 校验验证码值
      *
      * @author nece001@163.com
-     * @create 2026-06-02 23:27:35
+     * @create 2026-06-04 19:57:08
      *
-     * @return string
+     * @param string $phrase
+     * @return boolean
      */
-    public function getPhrase(): string;
+    public function check(string $phrase): bool;
 }
