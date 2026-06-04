@@ -13,14 +13,14 @@ interface Model
     /**
      * 创建模型实例.
      *
-     * @param array $data 初始化数据
+     * @param string $model_name 模型名称
      *
      * 使用方法：
-     * - $model = User::instance(new \think\Model())
+     * - $model = Model::instance(UserModel::class)
      *
      * @return Model
      */
-    public static function instance($dbModel): Model;
+    public static function instance(string $model_name): Model;
 
     /**
      * 设置单个属性值.
@@ -250,4 +250,34 @@ interface Model
      * @return array
      */
     public function toArray(): array;
+
+    /**
+     * 开启事务.
+     *
+     * @author nece001@163.com
+     * @create 2026-06-04 09:14:04
+     *
+     * @return void
+     */
+    public function startTrans(): void;
+
+    /**
+     * 提交事务.
+     *
+     * @author nece001@163.com
+     * @create 2026-06-04 09:14:10
+     *
+     * @return void
+     */
+    public function commit(): void;
+
+    /**
+     * 回滚事务.
+     *
+     * @author nece001@163.com
+     * @create 2026-06-04 09:14:15
+     *
+     * @return void
+     */
+    public function rollback(): void;
 }
