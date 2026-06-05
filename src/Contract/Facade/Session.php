@@ -52,4 +52,27 @@ interface Session
      * @return bool
      */
     public static function has(string $key): bool;
+
+    /**
+     * 设置会话属性
+     *
+     * @author nece001@163.com
+     * @create 2026-06-05 23:48:09
+     *
+     * @param array|string $key 属性键名或数组，数组时批量设置，字符串时单个设置
+     * @param mixed $value 属性值或数组值
+     * @return void
+     */
+    public static function put($key, $value = null): void;
+
+    /**
+     * 从会话中获取并删除属性
+     *
+     * @author nece001@163.com
+     * @create 2026-06-05 23:50:03
+     *
+     * @param string $key
+     * @return mixed
+     */
+    public static function pull(string $key);
 }
