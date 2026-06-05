@@ -65,9 +65,9 @@ interface UploadFile
      * 移动文件到指定位置
      *
      * @param string $destination
-     * @return \Webman\File
+     * @return \SplFileInfo
      */
-    public function move(string $destination): \Webman\File;
+    public function move(string $destination): \SplFileInfo;
 
     /**
      * 获取文件路径（不含文件名）
