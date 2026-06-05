@@ -45,4 +45,14 @@ interface Env
      * @return string
      */
     public static function getAppEnv(): string;
+
+    /**
+     * 获取应用根目录
+     *
+     * @author nece001@163.com
+     * @create 2026-06-05 12:34:05
+     *
+     * @return string
+     */
+    public static function getRootPath(): string;
 }
