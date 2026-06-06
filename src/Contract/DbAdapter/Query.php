@@ -719,8 +719,8 @@ interface Query extends \Stringable
     /**
      * 分页查询.
      *
-     * @param int   $page     当前页码
      * @param int   $page_size 每页数量
+     * @param int   $page     当前页码
      * @param array $options  额外选项
      *
      * 使用方法：
@@ -729,7 +729,7 @@ interface Query extends \Stringable
      *
      * @return Paginator
      */
-    public function paginate(int $page = 1, int $page_size = 15, array $options = []): Paginator;
+    public function paginate(int $page_size = 15, int $page = 1, array $options = []): Paginator;
 
     /**
      * 指定having查询.
