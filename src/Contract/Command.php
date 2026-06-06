@@ -55,7 +55,7 @@ interface Command
      *
      * @return void
      */
-    public function handle(): void;
+    public function handle();
 
     /**
      * 获取命令行参数
@@ -63,7 +63,7 @@ interface Command
      * @param string $name
      * @return mixed
      */
-    public function argument(string $name);
+    public function getArg($name);
 
     /**
      * 获取命令行选项
@@ -71,7 +71,7 @@ interface Command
      * @param string $name
      * @return mixed
      */
-    public function option(string $name);
+    public function getOpt($name);
 
     /**
      * 询问用户
@@ -80,7 +80,7 @@ interface Command
      * @param mixed $default
      * @return mixed
      */
-    public function ask(string $question, $default = null);
+    public function showAsk($question, $default = null);
 
     /**
      * 确认用户操作
@@ -89,7 +89,7 @@ interface Command
      * @param bool $default
      * @return bool
      */
-    public function confirm(string $question, bool $default = false): bool;
+    public function showConfirm($question, $default = false);
 
     /**
      * 选择用户操作
@@ -97,9 +97,11 @@ interface Command
      * @param string $question
      * @param array $choices
      * @param mixed $default
+     * @param int|null $attempts
+     * @param bool $multiple
      * @return mixed
      */
-    public function choice(string $question, array $choices, $default = null);
+    public function showChoice($question, array $choices, $default = null, $attempts = null, $multiple = false);
 
     /**
      * 输出空行
@@ -107,23 +109,7 @@ interface Command
      * @param int $count
      * @return void
      */
-    public function newLine(int $count = 1): void;
-
-    /**
-     * 输出消息（带换行）
-     *
-     * @param string $message
-     * @return void
-     */
-    public function writeln(string $message): void;
-
-    /**
-     * 输出消息（不带换行）
-     *
-     * @param string $message
-     * @return void
-     */
-    public function write(string $message): void;
+    public function showLine($count = 1);
 
     /**
      * 输出信息消息
@@ -131,7 +117,7 @@ interface Command
      * @param string $message
      * @return void
      */
-    public function info(string $message): void;
+    public function showInfo($message);
 
     /**
      * 输出注释消息
@@ -139,7 +125,7 @@ interface Command
      * @param string $message
      * @return void
      */
-    public function comment(string $message): void;
+    public function showComment($message);
 
     /**
      * 输出问题消息
@@ -147,7 +133,7 @@ interface Command
      * @param string $question
      * @return void
      */
-    public function question(string $question): void;
+    public function showQuestion($question);
 
     /**
      * 输出警告消息
@@ -155,7 +141,7 @@ interface Command
      * @param string $message
      * @return void
      */
-    public function warn(string $message): void;
+    public function showWarn($message);
 
     /**
      * 输出错误消息
@@ -163,7 +149,7 @@ interface Command
      * @param string $message
      * @return void
      */
-    public function error(string $message): void;
+    public function showError($message);
 
     /**
      * 添加命令行参数
