@@ -202,4 +202,11 @@ interface UploadFile
      * @return string|false
      */
     public function getRealPath(): string|false;
+
+    /**
+     * 获取原生上传文件对象
+     *
+     * @return mixed
+     */
+    public function getRealUploadFile();
 }
