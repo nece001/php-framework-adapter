@@ -91,33 +91,6 @@ interface Query extends \Stringable
     public function fieldRaw(string $field): Query;
 
     /**
-     * 指定要排除的查询字段.
-     *
-     * @param array $field 要排除的字段（字段名数组）
-     *
-     * 使用方法：
-     * - withoutField(['password', 'token'])
-     *
-     * @return $this
-     */
-    public function withoutField(array $field): Query;
-
-    /**
-     * 指定其它数据表的查询字段.
-     *
-     * @param array  $field     字段信息（字段名数组）
-     * @param string $tableName 数据表名
-     * @param string $prefix    字段前缀
-     * @param string $alias     别名前缀
-     *
-     * 使用方法：
-     * - tableField(['id', 'name'], 'user')
-     *
-     * @return $this
-     */
-    public function tableField(array $field, string $tableName, string $prefix = '', string $alias = ''): Query;
-
-    /**
      * COUNT查询.
      *
      * @param string $field 字段名
@@ -183,18 +156,18 @@ interface Query extends \Stringable
     /**
      * 查询SQL组装 join.
      *
-     * @param string $join      关联的表名
+     * @param Model $model      关联的模型
      * @param string $condition 条件
      * @param string $type      JOIN类型（支持 INNER, LEFT, RIGHT, FULL）
      * @param array  $bind      参数绑定
      *
      * 使用方法：
-     * - join('user', 'user.id = order.user_id')
-     * - join('user', 'user.id = order.user_id', 'LEFT')
+     * - join(new User(), 'user.id = order.user_id')
+     * - join(new User(), 'user.id = order.user_id', 'LEFT')
      *
      * @return $this
      */
-    public function join(string $join, string $condition = null, string $type = 'INNER', array $bind = []): Query;
+    public function join(Model $model, string $condition = null, string $type = 'INNER', array $bind = []): Query;
 
     /**
      * LEFT JOIN.
@@ -208,7 +181,7 @@ interface Query extends \Stringable
      *
      * @return $this
      */
-    public function leftJoin(string $join, string $condition = null, array $bind = []): Query;
+    public function leftJoin(Model $model, string $condition = null, array $bind = []): Query;
 
     /**
      * RIGHT JOIN.
@@ -222,21 +195,7 @@ interface Query extends \Stringable
      *
      * @return $this
      */
-    public function rightJoin(string $join, string $condition = null, array $bind = []): Query;
-
-    /**
-     * FULL JOIN.
-     *
-     * @param string $join      关联的表名
-     * @param string $condition 条件
-     * @param array  $bind      参数绑定
-     *
-     * 使用方法：
-     * - fullJoin('user', 'user.id = order.user_id')
-     *
-     * @return $this
-     */
-    public function fullJoin(string $join, string $condition = null, array $bind = []): Query;
+    public function rightJoin(Model $model, string $condition = null, array $bind = []): Query;
 
     /**
      * 指定AND查询条件.

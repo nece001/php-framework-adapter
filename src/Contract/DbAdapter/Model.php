@@ -23,6 +23,27 @@ interface Model
     public static function instance(string $model_name): Model;
 
     /**
+     * 设置别名
+     *
+     * @author nece001@163.com
+     * @create 2026-06-08 18:57:11
+     *
+     * @param string $alias 别名
+     * @return Model
+     */
+    public function setAlias(string $alias): Model;
+
+    /**
+     * 获取别名
+     *
+     * @author nece001@163.com
+     * @create 2026-06-08 18:57:11
+     *
+     * @return string
+     */
+    public function getAlias(): string;
+
+    /**
      * 设置单个属性值.
      *
      * @param string $name  属性名
