@@ -1,211 +1,301 @@
 # PHP 框架适配器
 
-目前兼容框架：
+## 核心目标
+
+开发一套代码，可以无缝运行于多个 PHP 框架。
+
+通过统一的接口抽象，让您的业务代码与具体框架解耦，实现一次开发、多处运行。
+
+## 支持框架
 
 - Laravel
 - Webman
 - ThinkPHP
 
-适配器提供统一的接口，方便在不同框架之间切换。
+## 安装方式
 
-具体实现:
-
-```
-composer require nece001/php-framework-adapter-laravel # Laravel 适配器
-composer require nece001/php-framework-adapter-webman # Webman 适配器
-composer require nece001/php-framework-adapter-thinkphp # ThinkPHP 适配器
+```bash
+composer require nece001/php-framework-adapter-laravel  # Laravel 适配器
+composer require nece001/php-framework-adapter-webman    # Webman 适配器
+composer require nece001/php-framework-adapter-thinkphp  # ThinkPHP 适配器
 ```
 
-## 核心接口说明
+## 设计理念
 
-### 1. 控制器接口 (Controller)
+### 统一契约，框架无关
 
-提供统一的控制器操作方法：
+定义标准化的接口契约，屏蔽不同框架的实现差异：
 
 ```php
+// 业务代码仅依赖契约接口
 use Nece\Framework\Adapter\Contract\Controller;
+use Nece\Framework\Adapter\Contract\Facade\Db;
+use Nece\Framework\Adapter\Contract\Facade\Container;
 
-interface MyController extends Controller
+class UserController implements Controller
 {
     public function index()
     {
+        // 统一的数据库操作
+        $users = Db::query()->table('users')->get();
+        
+        // 统一的响应方式
+        return $this->success(['users' => $users]);
+    }
+}
+```
+
+### 核心契约接口
+
+| 接口 | 作用 | 统一能力 |
+|------|------|----------|
+| `Controller` | 控制器契约 | json/success/failure/redirect/download |
+| `Db` | 数据库门面 | 查询/事务/聚合函数 |
+| `Model` | 模型契约 | 数据读写/属性操作/验证 |
+| `Container` | 容器门面 | 依赖注入/服务解析 |
+| `Paginator` | 分页器 | 统一分页数据结构 |
+
+## 使用示例
+
+以下示例基于实际项目实现，展示如何基于抽象契约开发框架无关的代码。
+
+### 1. 控制器实现
+
+```php
+use Nece\Framework\Adapter\Controller;
+use Nece\Gears\Agreement\Service\AgreementService;
+
+class AgreementController extends Controller
+{
+    public function document()
+    {
+        $find_key = $this->request()->input('find_key');
+
+        $service = new AgreementService();
+        $content = $service->getDocumentContent($find_key);
+
+        return $this->success($content);
+    }
+
+    public function sign()
+    {
+        $find_key = $this->request()->input('find_key');
+        $signatory_id = $this->request()->input('signatory_id');
+        $signatory = $this->request()->input('signatory');
+        $signing_data = $this->request()->input('signing_data', []);
+
+        $service = new AgreementService();
+        $record = $service->signing($find_key, $signatory_id, $signatory, $signing_data);
+
+        return $this->success($record);
+    }
+}
+```
+
+### 2. 服务层实现
+
+```php
+use Nece\Framework\Adapter\DbAdapter\Model;
+use Nece\Framework\Adapter\Exception\NotFoundException;
+use Nece\Gears\Agreement\Model\AgreementDocument;
+use Nece\Gears\Agreement\Model\AgreementSigningRecord;
+use Nece\Gears\Agreement\Model\Agreement;
+
+class AgreementService
+{
+    public function signing(int $agreement_id, int $signatory_id, string $signatory, array $signing_data = []): AgreementSigningRecord
+    {
+        $document = Model::instance(AgreementDocument::class)
+            ->where('agreement_id', $agreement_id)
+            ->where('is_published', 1)
+            ->find();
+            
+        if (!$document) {
+            throw new NotFoundException('协议文档不存在');
+        }
+
+        $content = $document->content;
+        if ($signing_data) {
+            foreach ($signing_data as $key => $value) {
+                $content = str_replace('{' . $key . '}', $value, $content);
+            }
+        }
+
+        $record = Model::instance(AgreementSigningRecord::class);
+        $record->agreement_id = $agreement_id;
+        $record->agreement_document_id = $document->id;
+        $record->signatory_id = $signatory_id;
+        $record->signatory = $signatory;
+        $record->content = $content;
+        $record->signing_data = $signing_data;
+        $record->save();
+
+        return $record;
+    }
+}
+```
+
+### 3. 模型定义
+
+```php
+use Nece\Framework\Adapter\BaseModel;
+use Nece\Framework\Adapter\DbAdapter\SoftDelete;
+
+class Agreement extends BaseModel
+{
+    use SoftDelete;
+}
+
+class AgreementDocument extends BaseModel
+{
+    // 模型属性自动映射数据库字段
+}
+
+class AgreementSigningRecord extends BaseModel
+{
+    // 模型属性自动映射数据库字段
+}
+```
+
+### 4. 请求处理
+
+```php
+use Nece\Framework\Adapter\Controller;
+
+class UserController extends Controller
+{
+    public function index()
+    {
+        // 获取 GET 参数
+        $page = $this->request()->get('page', 1);
+        
+        // 获取 POST 参数
+        $username = $this->request()->post('username');
+        
+        // 获取所有输入参数
+        $data = $this->request()->input();
+        
+        // 获取请求方法
+        $method = $this->request()->method();
+        
+        // 获取请求 URI
+        $uri = $this->request()->uri();
+        
+        return $this->success(['page' => $page]);
+    }
+}
+```
+
+### 5. 响应处理
+
+```php
+use Nece\Framework\Adapter\Controller;
+
+class ResponseController extends Controller
+{
+    public function jsonResponse()
+    {
         // 返回 JSON 响应
-        return $this->json(['data' => 'hello']);
-        
+        return $this->json(['code' => 0, 'message' => 'success']);
+    }
+    
+    public function successResponse()
+    {
         // 返回成功响应
-        return $this->success(['list' => []]);
-        
+        return $this->success(['data' => 'value'], '操作成功');
+    }
+    
+    public function failureResponse()
+    {
         // 返回失败响应
-        return $this->failure('操作失败');
-        
+        return $this->failure('操作失败', -1);
+    }
+    
+    public function redirectResponse()
+    {
         // 重定向
         return $this->redirect('/login');
-        
+    }
+    
+    public function downloadResponse()
+    {
         // 文件下载
-        return $this->download('/path/to/file');
+        return $this->download('/path/to/file.pdf');
     }
 }
 ```
 
-### 2. 数据库门面接口 (Db)
+### 6. 框架迁移示例
 
-提供统一的数据库操作方法：
-
+**Laravel 项目中的控制器**：
 ```php
-use Nece\Framework\Adapter\Contract\Facade\Db;
+use Nece\Framework\Adapter\Controller;
 
-// 创建原始表达式
-$raw = Db::raw('COUNT(*)');
-
-// 创建聚合函数
-$count = Db::rawCount('id', 'total');
-$sum = Db::rawSum('amount', 'sum_amount');
-
-// 事务操作
-Db::startTrans();
-try {
-    // 执行操作
-    Db::commit();
-} catch (\Exception $e) {
-    Db::rollback();
-}
-
-// 使用事务回调
-Db::transaction(function() {
-    // 事务内操作
-});
-```
-
-### 3. 模型接口 (Model)
-
-提供统一的模型操作方法：
-
-```php
-use Nece\Framework\Adapter\Contract\DbAdapter\Model;
-
-class UserModel implements Model
+class UserController extends Controller
 {
-    public function createUser()
+    public function list()
     {
-        // 设置属性
-        $this->setAttr('name', '张三');
-        $this->setAttr('age', 18);
-        
-        // 或批量设置
-        $this->data(['name' => '张三', 'age' => 18]);
-        
-        // 保存
-        $this->save();
-        
-        // 获取主键
-        $id = $this->getKey();
-        
-        // 获取属性
-        $name = $this->getAttr('name');
-        
-        // 验证
-        $this->validate(['name' => 'require']);
+        $keyword = $this->request()->input('keyword');
+        // 业务逻辑...
+        return $this->success($data);
     }
 }
 ```
 
-### 4. 容器接口 (Container)
-
-提供统一的依赖注入操作：
-
+**无需修改代码，直接在 Webman 中运行**：
 ```php
-use Nece\Framework\Adapter\Contract\Facade\Container;
-
-// 初始化应用
-Container::initApp();
-
-// 获取应用实例
-$app = Container::getApp();
-
-// 创建实例（依赖注入）
-$service = Container::make(MyService::class);
+// 同一个 UserController.php 文件
+// 直接复制到 Webman 项目即可运行
+// 框架适配器会自动适配底层实现
 ```
 
-### 5. 分页器 (Paginator)
-
-提供统一的分页数据结构：
-
+**无需修改代码，直接在 ThinkPHP 中运行**：
 ```php
-use Nece\Framework\Adapter\Paginator;
-
-// 创建分页器
-$paginator = new Paginator(
-    $items,       // 当前页数据
-    $total,       // 总记录数
-    $currentPage, // 当前页码
-    $pageSize     // 每页数量
-);
-
-// 获取分页信息
-$paginator->total();        // 总记录数
-$paginator->pageSize();     // 每页数量
-$paginator->currentPage();  // 当前页码
-$paginator->lastPage();     // 总页数
-$paginator->hasNextPage();  // 是否有下一页
-$paginator->hasPreviousPage(); // 是否有上一页
-
-// 转换为数组
-$array = $paginator->toArray();
+// 同一个 UserController.php 文件
+// 直接复制到 ThinkPHP 项目即可运行
+// 框架适配器会自动适配底层实现
 ```
 
-## 使用场景
+## 架构优势
 
-### 场景一：开发框架无关的组件库
+1. **一次开发，多处运行**：业务代码无需修改即可在 Laravel/Webman/ThinkPHP 间切换
+2. **框架迁移成本极低**：更换框架只需替换适配器包，核心业务代码保持不变
+3. **统一开发体验**：无论使用哪个框架，API 调用方式完全一致
+4. **降低学习成本**：掌握一套接口即可开发多个框架的项目
 
-```php
-// 框架无关的用户服务
-class UserService
-{
-    public function __construct(
-        protected Container $container,
-        protected Db $db
-    ) {}
-    
-    public function getUserById($id)
-    {
-        return $this->db->query()->where('id', $id)->find();
-    }
-}
-```
+## 利弊分析
 
-### 场景二：统一响应格式
+### 优势（利）
 
-```php
-// 基础控制器
-abstract class BaseController implements Controller
-{
-    public function success($data = null, string $message = 'success')
-    {
-        return $this->json([
-            'code' => 0,
-            'message' => $message,
-            'data' => $data
-        ]);
-    }
-    
-    public function failure(string $message = 'failure', $code = -1, $data = null)
-    {
-        return $this->json([
-            'code' => $code,
-            'message' => $message,
-            'data' => $data
-        ]);
-    }
-}
-```
+| 方面 | 说明 |
+|------|------|
+| **跨框架复用** | 同一套业务代码可在多个框架中运行，无需重复开发 |
+| **降低迁移风险** | 框架迁移时业务代码保持不变，减少回归测试工作量 |
+| **团队协作高效** | 团队成员只需学习一套接口，降低沟通成本 |
+| **封装底层差异** | 屏蔽不同框架的实现细节，专注业务逻辑 |
+| **灵活技术选型** | 可根据项目需求选择最适合的框架，不受历史代码限制 |
+| **代码质量统一** | 统一的接口规范有助于保持代码风格一致 |
 
-## 框架适配实现
+### 局限性（弊）
 
-本库仅提供契约定义，具体框架的适配实现需要另外提供：
+| 方面 | 说明 |
+|------|------|
+| **学习曲线** | 需要额外学习适配器的抽象接口和使用方式 |
+| **功能受限** | 适配器只提供通用功能，框架特有高级功能无法直接使用 |
+| **性能开销** | 适配器层会增加一层调用开销，虽微小但存在 |
 
-- **Laravel**：参考 `laravel/` 目录
-- **ThinkPHP**：参考 `thinkphp/` 目录  
-- **Webman**：参考 `webman/` 目录
+### 适用场景建议
+
+**推荐使用**：
+- 需要开发跨框架的组件库或 SDK
+- 团队同时维护多个框架的项目
+- 不确定未来是否需要更换框架的新项目
+- 需要快速在不同框架间原型验证
+
+**不建议使用**：
+- 项目明确只使用单一框架且长期稳定
+- 需要深度使用框架特有功能的项目
+- 对性能有极致要求的高性能场景
 
 ## 依赖要求
 
