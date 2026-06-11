@@ -68,4 +68,18 @@ interface Response
      * @return mixed
      */
     public static function notFound();
+
+    /**
+     * 构建数据响应
+     *
+     * @author nece001@163.com
+     * @create 2026-06-11 19:44:02
+     *
+     * @param mixed $code 状态码
+     * @param string $status 状态描述，success 或 failure用来判断请求是否成功或失败
+     * @param string $message 消息描述
+     * @param array $data 数据
+     * @return void
+     */
+    public static function buildData($code, $status, $message, $data = []);
 }
