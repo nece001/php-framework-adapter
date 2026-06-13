@@ -16,52 +16,59 @@ interface Response
     /**
      * JSON 响应
      * @param mixed $data 数据
-     * @param int $options 选项
+     * @param int $status 状态码
+     * @param array $headers 请求头
+     * @param array $options 选项
      * @return mixed
      */
-    public static function json($data, int $options = JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR);
+    public static function json($data, int $status = 200, array $headers = [], array $options = []);
 
     /**
      * XML 响应
      * @param mixed $xml XML数据
+     * @param int $status 状态码
+     * @param array $headers 请求头
+     * @param array $options 选项
      * @return mixed
      */
-    public static function xml($xml);
+    public static function xml($xml, int $status = 200, array $headers = [], array $options = []);
 
     /**
      * JSONP 响应
      * @param mixed $data 数据
-     * @param string $callback_name 回调函数名
+     * @param int $status 状态码
+     * @param array $headers 请求头
+     * @param array $options 选项
      * @return mixed
      */
-    public static function jsonp($data, string $callback_name = 'callback');
+    public static function jsonp($data, int $status = 200, array $headers = [], array $options = []);
 
     /**
      * 重定向响应
      * @param string $location 重定向地址
      * @param int $status 状态码
-     * @param array $headers 请求头
      * @return mixed
      */
-    public static function redirect(string $location, int $status = 302, array $headers = []);
+    public static function redirect(string $location, int $status = 302);
 
     /**
      * 视图响应
      * @param mixed $template 模板
      * @param array $vars 变量
-     * @param string|null $app 应用
-     * @param string|null $plugin 插件
+     * @param int $status 状态码
      * @return mixed
      */
-    public static function view(mixed $template = null, array $vars = [], ?string $app = null, ?string $plugin = null);
+    public static function view(mixed $template = null, array $vars = [], int $status = 200);
 
     /**
      * 文件下载响应
-     * @param string $file_path 文件路径
-     * @param string|null $filename 文件名
+     * @param string $filename 文件名
+     * @param string $name 下载文件名
+     * @param bool $content 是否为内容
+     * @param int $expire 过期时间
      * @return mixed
      */
-    public static function download(string $file_path, ?string $filename = null);
+    public static function download(string $filename, string $name = '', bool $content = false, int $expire = 180);
 
     /**
      * 404 未找到
@@ -71,9 +78,6 @@ interface Response
 
     /**
      * 构建数据响应
-     *
-     * @author nece001@163.com
-     * @create 2026-06-11 19:44:02
      *
      * @param mixed $code 状态码
      * @param string $status 状态描述，success 或 failure用来判断请求是否成功或失败
